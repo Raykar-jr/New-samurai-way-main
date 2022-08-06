@@ -1,13 +1,25 @@
 .nav {
     grid-area: n;
     background-color: bisque;
+    padding: 15px;
+    font-family: Karla, serif;
 
 }
 
-.item {
-    color: green;
+.item a {
+    color: #FFF;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 400;
+    line-height: 1.25;
+
 
 }
-.item.active {
-    background-color: gold;
+
+.item a:hover {
+    background-color: #1abc9c;
+}
+.item a.active {
+    color: #1abc9c;
+    background-color: rgba(82, 84, 83, 0.1);
 }
