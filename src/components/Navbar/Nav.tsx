@@ -22,6 +22,20 @@ export const Navbar = () => {
                 <NavLink to="/settings" activeClassName={s.active}>Settings</NavLink>
             </div>
 
+            <div className={s.friendsBlock}>
+                <div className={s.friendsTitle}>Friends</div>
+                <div className={s.circleBlock}>
+                    <div className={s.circle}></div>
+                    <div className={s.circle}></div>
+                    <div className={s.circle}></div>
+                </div>
+                <div className={s.namesBlock}>
+                    <span className={s.names}>Andrew</span>
+                    <span className={s.names}>Sasha </span>
+                    <span className={s.names}>Sveta </span>
+                </div>
+            </div>
+
         </nav>
     )
 }
