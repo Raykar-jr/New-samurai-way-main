@@ -5,7 +5,6 @@ import {Message} from "./Message/Message";
 import {DialogsPageType} from "../../redux/State";
 
 
-
 export type DialogPropsType = {
     state: DialogsPageType
 }
@@ -14,7 +13,11 @@ const Dialogs = (props: DialogPropsType) => {
 
     const messageElements = props.state.messages.map(el => <Message content={el.message} id={el.id}/>)
     const dialogElements = props.state.dialogs.map(el => <DialogItem name={el.name} id={el.id}/>)
-
+    const addMessage = () => {
+        let message = newElement.current.value
+        alert(message)
+    }
+    let newElement: any = React.createRef()
     return (
         <div className={s.dialogs}>
             <div className={s.dialogItems}>
@@ -27,6 +30,10 @@ const Dialogs = (props: DialogPropsType) => {
 
             <div className={s.messages}>
                 {messageElements}
+
+                <textarea ref={newElement}></textarea>
+                <br/>
+                <button onClick={addMessage}>Add message</button>
                 {/*<Message content={messagesData[0].message} id={messagesData[0].id}/>*/}
                 {/*<Message content={messagesData[1].message} id={messagesData[1].id}/>*/}
                 {/*<Message content={messagesData[2].message} id={messagesData[2].id}/>*/}
