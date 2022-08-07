@@ -18,6 +18,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
         if (newPostElement && newPostElement.current) {
             let messagePost = newPostElement.current.value
             props.addPost(messagePost)
+            newPostElement.current.value = ''
         }
     }
     let newPostElement = React.createRef<HTMLTextAreaElement>()

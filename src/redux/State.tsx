@@ -1,3 +1,5 @@
+import {rerenderEntireTree} from "../Render";
+
 export type DialogsPageType = {
     messages: MessageType[]
     dialogs: DialogType[]
@@ -31,6 +33,7 @@ export type StateType = {
 export const addPost = (message: string) => {
     let newPost = {id: 3, message: message, likeCounts: 0}
     state.profilePage.postData.push(newPost)
+    rerenderEntireTree(state)
 }
 
 export const state = {
