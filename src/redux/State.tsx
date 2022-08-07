@@ -28,7 +28,10 @@ export type StateType = {
     sidebar: SidebarType[]
 }
 
-
+export const addPost = (message: string) => {
+    let newPost = {id: 3, message: message, likeCounts: 0}
+    state.profilePage.postData.push(newPost)
+}
 
 export const state = {
     profilePage: {

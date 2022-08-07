@@ -1,4 +1,4 @@
-import React, {LegacyRef, RefObject} from 'react';
+import React from 'react';
 import s from './MyPosts.module.css'
 import {Post} from "./Post/Post";
 import {PostDataType} from "../../../redux/State";
@@ -6,6 +6,7 @@ import {PostDataType} from "../../../redux/State";
 
 type MyPostsPropsType = {
     postData: PostDataType[]
+    addPost: (message: string) => void
 }
 export const MyPosts = (props: MyPostsPropsType) => {
 
@@ -14,10 +15,12 @@ export const MyPosts = (props: MyPostsPropsType) => {
                                                         likeCounts={el.likeCounts}
                                                         message={el.message}/>)
     const addPost = () => {
-        let messagePost = newPostElement.current.value
-        alert(messagePost)
+        if (newPostElement && newPostElement.current) {
+            let messagePost = newPostElement.current.value
+            props.addPost(messagePost)
+        }
     }
-    let newPostElement: any = React.createRef() // Изменить any!
+    let newPostElement = React.createRef<HTMLTextAreaElement>()
 
     return (
         <div className={s.myPostsBlock}>
