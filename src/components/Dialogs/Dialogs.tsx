@@ -2,7 +2,7 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {ActionTypes, DialogsPageType} from "../../redux/State";
+import {ActionTypes, sendNewMessageAC, DialogsPageType, updateNewMessageAC} from "../../redux/State";
 
 
 export type DialogPropsType = {
@@ -23,17 +23,17 @@ const Dialogs: React.FC<DialogPropsType> = (props) => {
     //     }
     // }
 
-    let refForTextarea = React.createRef<HTMLTextAreaElement>() // Своего рода костыль?) Создаёт ссылку-объект
+/*    let refForTextarea = React.createRef<HTMLTextAreaElement>()*/ // Своего рода костыль?) Создаёт ссылку-объект
     //let refForTextarea = useRef<HTMLTextAreaElement>() В дальнейшем будем использовать
-    const addMessageHandler = () => {
+    const sendMessageHandler = () => {
         // props.addNewMessage()
-        props.dispatch( {type: 'ADD-NEW-MESSAGE'})
+        props.dispatch( sendNewMessageAC())
     }
 const onChangeTextAreaHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        let textMessage = refForTextarea.current?.value
+        let textMessage = event.target.value
     if (textMessage) {
         // props.updateNewMessage(textMessage)
-        props.dispatch({type: 'UPDATE-NEW-MESSAGE', textMessage: textMessage })
+        props.dispatch(updateNewMessageAC(textMessage))
     }
 }
 
@@ -48,11 +48,10 @@ const onChangeTextAreaHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
                 {messageElements}
 
                 <textarea onChange={onChangeTextAreaHandler}
-                          ref={refForTextarea}
                           value={props.state.newMessageText}
                 ></textarea>
                 <br/>
-                <button onClick={addMessageHandler}>Add message</button>
+                <button onClick={sendMessageHandler}>Send message</button>
 
             </div>
         </div>

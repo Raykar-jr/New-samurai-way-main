@@ -14,10 +14,6 @@ import {ActionTypes, StateType} from "./redux/State";
 export type AppPropsType = {
     state: StateType
     dispatch: (action: ActionTypes) => void
-    // addPost: () => void
-    // updateNewPostText: (text: string) => void
-    // addNewMessage: () => void
-    // updateNewMessage: (textMessage: string) => void
 
 }
 
@@ -31,13 +27,11 @@ const App: React.FC<AppPropsType> = (props ) => {
                     {/*<Route path='/dialogs' component={Dialogs}/> */}
                     <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage}
                                                                   dispatch={props.dispatch}
-                                                                  // addNewMessage={props.addNewMessage}
-                                                                  // updateNewMessage={props.updateNewMessage}
+
                     />}/>
                     <Route path='/profile' render={() => <Profile state={props.state.profilePage}
                                                                   dispatch={props.dispatch}
-                                                                  // addPost={props.addPost}
-                                                                  // updateNewPostText={props.updateNewPostText}
+
                     />}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>
