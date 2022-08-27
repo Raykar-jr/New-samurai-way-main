@@ -1,13 +1,14 @@
 import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css'
 import {Post} from "./Post/Post";
-import {ProfilePageType} from "../../../redux/State";
+import {ActionTypes, ProfilePageType} from "../../../redux/State";
 
 
 type MyPostsPropsType = {
     profilePage: ProfilePageType
-    addPost: () => void
-    updateNewPostText: (text: string) => void
+    dispatch: (action: ActionTypes ) => void
+    // addPost: () => void
+    // updateNewPostText: (text: string) => void
 }
 export const MyPosts = (props: MyPostsPropsType) => {
 
@@ -27,19 +28,24 @@ export const MyPosts = (props: MyPostsPropsType) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const addPostHandler = () => {
-        props.addPost()
+        // props.addPost()
+        props.dispatch( {type: 'ADD-POST'} )
     }
     const onChangeTextAreaHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
         let text = newPostElement.current?.value
         if (text) {
-            props.updateNewPostText(text)
+            // props.updateNewPostText(text)
+
+            props.dispatch( {type: 'UPDATE-NEW-POST-TEXT', text: text} )
+            // let action = {type: 'UPDATE-NEW-POST-TEXT', text: text}
+            //     props.dispatch(action)
         }
     }
     return (
         <div className={s.myPostsBlock}>
             <h3>My posts</h3>
             <div>
-                {/*<div><textarea ref={newPostElement}></textarea></div>*/}
+
                 <div><textarea onChange={onChangeTextAreaHandler}
                                value={props.profilePage.newPostText}
                                ref={newPostElement}

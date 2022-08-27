@@ -1,5 +1,3 @@
-import {rerenderEntireTree} from "../Render";
-
 export type DialogsPageType = {
     messages: MessageType[]
     dialogs: DialogType[]
@@ -32,64 +30,98 @@ export type StateType = {
     sidebar: SidebarType[]
 }
 
-// export const addPost = (message: string) => {
-//     let newPost: PostDataType = {id: 3, message: message, likeCounts: 0}
-//     state.profilePage.postData.push(newPost)
-//     rerenderEntireTree(state) // перерисуй всё с обновлёнными данными
-// }
-export const addPost = () => {
-    let newPost: PostDataType = {id: 3, message: state.profilePage.newPostText, likeCounts: 0}
-    state.profilePage.postData.push(newPost)
-    state.profilePage.newPostText = ''
-    rerenderEntireTree(state)
+export type StoreType = {
+    _state: StateType
+    _callSubscriber: (vau: any) => void
+    getState: () => StateType
+    subscribe: (observer: (state: StateType) => void) => void // ????
+    dispatch: (action: ActionTypes ) => void
 }
-export const updateNewPostText = (text: string) => {
-    state.profilePage.newPostText = text
-    rerenderEntireTree(state)
+export type UpdateNewPostTextActionType = {
+    type: 'UPDATE-NEW-POST-TEXT'
+    text: string
 }
-
-export const addNewMessage = () => {
-let newMessageObj = {id: 5, message: state.dialogsPage.newMessageText}
-    state.dialogsPage.messages.push(newMessageObj)
-    state.dialogsPage.newMessageText = ''
-    rerenderEntireTree(state)
+export type AddPostActionType = {
+    type: 'ADD-POST'
 }
-export const updateNewMessage = (textMessage: string) => {
-state.dialogsPage.newMessageText = textMessage
-    rerenderEntireTree(state)
+export type AddNewMessageActionType = {
+    type: 'ADD-NEW-MESSAGE'
+}
+export type UpdateNewMessageActionType = {
+    type: 'UPDATE-NEW-MESSAGE'
+    textMessage: string
 }
 
-export const state: StateType = {
-    profilePage: {
-        postData: [
-            {id: 1, message: 'Hello, how are you?', likeCounts: 12},
-            {id: 2, message: 'It is my first post', likeCounts: 13},
-        ],
-        newPostText: '',
+export type ActionTypes = UpdateNewPostTextActionType | AddPostActionType | AddNewMessageActionType | UpdateNewMessageActionType
+export let store: StoreType = {
+    _state: {
+        profilePage: {
+            postData: [
+                {id: 1, message: 'Hello, how are you?', likeCounts: 12},
+                {id: 2, message: 'It is my first post', likeCounts: 13},
+            ],
+            newPostText: '',
 
+        },
+        dialogsPage: {
+            messages: [
+                {id: 1, message: 'Hello'},
+                {id: 2, message: 'I feel great'},
+                {id: 3, message: 'How was your day?'},
+                {id: 4, message: 'How is the weather today?'},
+
+            ],
+            newMessageText: '',
+            dialogs: [
+                {id: 1, name: 'Nikolay'},
+                {id: 2, name: 'Valera'},
+                {id: 3, name: 'Rostik'},
+                {id: 4, name: 'Ruslan'},
+            ],
+        },
+        sidebar: [
+            {id: 1, name: 'Ruslan'},
+            {id: 2, name: 'Nikolay'},
+            {id: 3, name: 'Ruslan'},
+            {id: 4, name: 'Rostik'},
+
+        ]
     },
-    dialogsPage: {
-        messages: [
-            {id: 1, message: 'Hello'},
-            {id: 2, message: 'I feel great'},
-            {id: 3, message: 'How was your day?'},
-            {id: 4, message: 'How is the weather today?'},
-
-        ],
-        newMessageText: '',
-        dialogs: [
-            {id: 1, name: 'Nikolay'},
-            {id: 2, name: 'Valera'},
-            {id: 3, name: 'Rostik'},
-            {id: 4, name: 'Ruslan'},
-        ],
+    _callSubscriber(vau: any) {
     },
-    sidebar: [
-        {id: 1, name: 'Ruslan'},
-        {id: 2, name: 'Nikolay'},
-        {id: 3, name: 'Ruslan'},
-        {id: 4, name: 'Rostik'},
 
-    ]
+    getState() {
+        return this._state
+    },
+    subscribe(observer) {
+        this._callSubscriber = observer
+    },
+
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            let newPost: PostDataType = {id: 3, message: this._state.profilePage.newPostText, likeCounts: 0}
+            this._state.profilePage.postData.push(newPost)
+            this._state.profilePage.newPostText = ''
+            this._callSubscriber(this._state)
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newPostText = action.text
+            this._callSubscriber(this._state)
+        } else if (action.type === 'ADD-NEW-MESSAGE') {
+            let newMessageObj = {id: 5, message: this._state.dialogsPage.newMessageText}
+            this._state.dialogsPage.messages.push(newMessageObj)
+            this._state.dialogsPage.newMessageText = ''
+            this._callSubscriber(this._state)
+        } else if (action.type === 'UPDATE-NEW-MESSAGE') {
+            this._state.dialogsPage.newMessageText = action.textMessage
+            this._callSubscriber(this._state)
+        }
+    },
+
+
 }
+
+
+
+
+
 
