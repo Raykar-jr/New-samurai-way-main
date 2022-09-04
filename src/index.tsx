@@ -2,7 +2,8 @@ import React from 'react';
 import './index.css';
 import ReactDOM from "react-dom";
 import App from "./App";
-import {store} from "./redux/State";
+import {store} from "./redux/ReduxStore";
+
 
 let rerenderEntireTree = (state: any) => {
     ReactDOM.render(
@@ -20,4 +21,7 @@ let rerenderEntireTree = (state: any) => {
 }
 rerenderEntireTree(store.getState()) // вызов функции для начальной отрисовки без изменения state
 
-store.subscribe(rerenderEntireTree)
+store.subscribe( () => {
+    let state = store.getState()
+    rerenderEntireTree(state)
+})
