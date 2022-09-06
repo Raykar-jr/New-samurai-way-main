@@ -1,22 +1,22 @@
 import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css'
 import {Post} from "./Post/Post";
-import {ActionTypes, ProfilePageType} from "../../../redux/Store";
-import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profileReducer";
+import {PostDataType} from "../../../redux/Store";
 
 
 type MyPostsPropsType = {
-    profilePage: ProfilePageType
-    dispatch: (action: ActionTypes) => void
-
+    posts: PostDataType[]
+    addPost: () => void
+    updateNewPostText: (text: string) => void
+    newPostText: string
 }
 export const MyPosts = (props: MyPostsPropsType) => {
 
 
-    const postElements = props.profilePage.postData.map(el => <Post key={el.id}
-                                                                    id={el.id}
-                                                                    likeCounts={el.likeCounts}
-                                                                    message={el.message}/>)
+    const postElements = props.posts.map(el => <Post key={el.id}
+                                                     id={el.id}
+                                                     likeCounts={el.likeCounts}
+                                                     message={el.message}/>)
     // const addPost = () => {
     //     if (newPostElement && newPostElement.current) {
     //         let messagePost = newPostElement.current.value
@@ -29,18 +29,12 @@ export const MyPosts = (props: MyPostsPropsType) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const addPostHandler = () => {
-        // props.addPost()
-        // props.dispatch( {type: 'ADD-POST'} )
-        props.dispatch( addPostActionCreator() )
+        props.addPost()
     }
     const onChangeTextAreaHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
         let text = newPostElement.current?.value
         if (text) {
-            // props.updateNewPostText(text)
-            /*props.dispatch( {type: 'UPDATE-NEW-POST-TEXT', text: text} )*/
-            let action = updateNewPostTextActionCreator(text)
-            props.dispatch(action)
-            //     props.dispatch(action)
+            props.updateNewPostText(text)
         }
     }
     return (
@@ -49,7 +43,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
             <div>
 
                 <div><textarea onChange={onChangeTextAreaHandler}
-                               value={props.profilePage.newPostText}
+                               value={props.newPostText}
                                ref={newPostElement}
                 ></textarea></div>
                 <div>
@@ -57,9 +51,6 @@ export const MyPosts = (props: MyPostsPropsType) => {
                 </div>
                 <div className={s.posts}>
                     {postElements}
-                    {/*<Post id={postData[0].id} likeCounts={postData[0].likeCounts} message={postData[0].message}/>*/}
-                    {/*<Post id={postData[0].id} likeCounts={postData[0].likeCounts} message={postData[1].message}/>*/}
-                    {/*<Post/>*/}
                 </div>
             </div>
         </div>

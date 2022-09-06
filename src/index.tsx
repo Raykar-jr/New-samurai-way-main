@@ -9,7 +9,8 @@ let rerenderEntireTree = (state: any) => {
     ReactDOM.render(
         <App
             state={store.getState()}
-            dispatch={store.dispatch.bind(store)} // .bind(store) сохраняем владельца метода, чтобы не потерять контекст this. Мы передаём метод объекта как коллбэк дальше, где его вызовут
+            dispatch={store.dispatch.bind(store)}
+            store={store}// .bind(store) сохраняем владельца метода, чтобы не потерять контекст this. Мы передаём метод объекта как коллбэк дальше, где его вызовут
             // addPost={store.addPost.bind(store)}
             // updateNewPostText={store.updateNewPostText.bind(store)}
             // addNewMessage={store.addNewMessage.bind(store)}
