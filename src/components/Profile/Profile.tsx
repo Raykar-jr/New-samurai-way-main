@@ -4,11 +4,12 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {MyPostsContainer} from "./MyPosts/Post/MyPostsContainer";
 
 
-type ProfilePropsType = {
-    store: any
-}
 
-export const Profile = (props: ProfilePropsType) => {
+// type ProfilePropsType = {
+//     store: any
+// }
+
+export const Profile = () => {
 
     return (
         <div>

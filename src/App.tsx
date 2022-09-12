@@ -7,18 +7,18 @@ import {BrowserRouter, Route} from "react-router-dom";
 import Settings from "./components/Settings/Settings";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
-import {ActionTypes, StateType} from "./redux/Store";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 
-export type AppPropsType = {
-    state: StateType
-    dispatch: (action: ActionTypes) => void
-    store: any
 
-}
+// export type AppPropsType = {
+//     state: StateType
+//     dispatch: (action: ActionTypes) => void
+//     store: any
+//
+// }
 
-const App: React.FC<AppPropsType> = (props ) => {
+const App  = () => {
     debugger
     return (
         <BrowserRouter>
@@ -29,7 +29,8 @@ const App: React.FC<AppPropsType> = (props ) => {
                     {/*<Route path='/dialogs' component={Dialogs}/> */}
                     <Route path='/dialogs' render={() => <DialogsContainer/>}/>
                     {/*<Route path='/dialogs' render={() => <DialogsContainer store={props.store}/>}/>*/}
-                    <Route path='/profile' render={() => <Profile store={props.store}/>}/>
+                    <Route path='/profile' render={() => <Profile />}/>
+                    {/*<Route path='/profile' render={() => <Profile store={props.store}/>}/>*/}
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/settings' render={() => <Settings/>}/>
