@@ -20,14 +20,14 @@ const initialState = {
 
 }
 export const profileReducer = (state: ProfilePageType = initialState, action: ActionTypes) => {
-
     if (action.type === ADD_POST) {
         let newPost: PostDataType = {id: 3, message: state.newPostText, likeCounts: 0}
-        state.postData.push(newPost)
-        state.newPostText = ''
+        return {...state, postData: [...state.postData, newPost], newPostText: ''}
+        // state.postData.push(newPost)
+        // state.newPostText = ''
     } else if (action.type === UPDATE_NEW_POST_TEXT) {
-        state.newPostText = action.text
+        return {...state, newPostText: action.text}
+        // state.newPostText = action.text
     }
-
     return state
 }
