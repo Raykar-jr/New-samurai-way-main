@@ -1,6 +1,7 @@
 import {addPostActionCreator, profileReducer} from "./profileReducer";
 import {dialogsReducer, sendNewMessageAC, updateNewMessageAC} from "./dialogsReducer";
 import {sidebarReducer} from "./sidebarReducer";
+import {UserType} from "../components/Users/Users";
 
 
 export type DialogsPageType = {
@@ -46,11 +47,26 @@ export type UpdateNewPostTextActionType = {
     type: 'UPDATE-NEW-POST-TEXT'
     text: string
 }
+
 export type AddPostActionType = ReturnType<typeof addPostActionCreator>
 export type SendNewMessageActionType = ReturnType<typeof sendNewMessageAC>
 export type UpdateNewMessageActionType = ReturnType<typeof updateNewMessageAC>
 
-export type ActionTypes = UpdateNewPostTextActionType | AddPostActionType | SendNewMessageActionType | UpdateNewMessageActionType
+export type FollowAT = {
+    type: 'FOLLOW'
+    userID: number
+}
+export type UnfollowAT = {
+    type: 'UNFOLLOW'
+    userID: number
+}
+export type SetUsersAT = {
+    type: 'SET_USERS'
+    users: UserType[]
+}
+
+export type ActionTypes = UpdateNewPostTextActionType | AddPostActionType | SendNewMessageActionType | UpdateNewMessageActionType | FollowAT | UnfollowAT | SetUsersAT
+
 export let store: StoreType = {
     _state: {
         profilePage: {

@@ -2,6 +2,9 @@ import React from 'react';
 import {sendNewMessageAC, updateNewMessageAC} from "../../redux/dialogsReducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
+import {AppStateType} from "../../redux/ReduxStore";
+import {Dispatch} from "redux";
+import {DialogsPageType} from "../../redux/Store";
 
 // export const DialogsContainer = () => {
 //     return (
@@ -27,12 +30,19 @@ import {connect} from "react-redux";
 //     );
 // };
 
-const mapStateToProps = (state: any) => {
+type MapStateToPropsType = {
+    state: DialogsPageType
+}
+type DispatchPropsType = {
+    addNewMessage: () => void
+    updateNewMessage: (textMessage: string) => void
+}
+const mapStateToProps = (state: AppStateType): MapStateToPropsType  => {
     return {
         state: state.dialogsPage
     }
 }
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: Dispatch): DispatchPropsType => {
     return {
         addNewMessage: () => {
             dispatch( sendNewMessageAC()) // {type: 'ADD-NEW-MESSAGE'}
