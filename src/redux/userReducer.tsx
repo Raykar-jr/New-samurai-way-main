@@ -3,18 +3,21 @@ import {UserType} from "../components/Users/Users";
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
+const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT'
 
 export type stateUsersType = {
     users: UserType[]
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
 
 let initialState: stateUsersType = {
-    users: [
-       /* {id: 1, photoURL: 'https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745', followed: true, status: 'Lorem ipsum dolor sit amet', fullName: 'Kiril K.', location: {city: 'Minsk', country: 'Belarus'}},
-        {id: 2, photoURL: 'https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745', followed: false, status: 'Mauris auctor blandit auctor', fullName: 'Vasya T.', location: {city: 'Kiev', country: 'Ukraine'}},
-        {id: 3, photoURL: 'https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745', followed: false, status: 'Vestibulum id orci metus', fullName: 'Petya I.', location: {city: 'Moscow', country: 'Russia'}},
-        {id: 4, photoURL: 'https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745', followed: false, status: 'Vestibulum eu tempus sapien', fullName: 'Angel P.', location: {city: 'Minsk', country: 'Belarus'}},*/
-    ],
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1
 }
 
 export const userReducer = (state: stateUsersType = initialState, action: ActionTypes): stateUsersType => {
@@ -24,7 +27,11 @@ export const userReducer = (state: stateUsersType = initialState, action: Action
         case UNFOLLOW:
             return {...state, users: state.users.map(u => u.id === action.userID ? {...u, followed: false} : u)}
         case SET_USERS:
-            return {...state, users: [...state.users, ...action.users]}
+            return {...state, users: action.users}
+        case SET_CURRENT_PAGE:
+            return {...state, currentPage: action.currentPage }
+        case SET_TOTAL_COUNT:
+            return {...state, totalUsersCount: action.totalCount }
         default:
             return state;
     }
@@ -37,4 +44,10 @@ export const unfollowAC = (userID: number) => {
 }
 export const setUsersAC = (users: UserType[]) => {
     return {type: SET_USERS, users}
+}
+export const setCurrentPageAC = (currentPage: number) => {
+    return {type: SET_CURRENT_PAGE, currentPage} as const
+}
+export const setTotalCountAC = (totalCount: number) => {
+    return {type: SET_TOTAL_COUNT, totalCount} as const
 }

@@ -2,6 +2,7 @@ import {addPostActionCreator, profileReducer} from "./profileReducer";
 import {dialogsReducer, sendNewMessageAC, updateNewMessageAC} from "./dialogsReducer";
 import {sidebarReducer} from "./sidebarReducer";
 import {UserType} from "../components/Users/Users";
+import {setCurrentPageAC, setTotalCountAC} from "./userReducer";
 
 
 export type DialogsPageType = {
@@ -41,7 +42,7 @@ export type StoreType = {
     _callSubscriber: (vau: any) => void
     getState: () => StateType
     subscribe: (observer: (state: StateType) => void) => void // ????
-    dispatch: (action: ActionTypes ) => void
+    dispatch: (action: ActionTypes) => void
 }
 export type UpdateNewPostTextActionType = {
     type: 'UPDATE-NEW-POST-TEXT'
@@ -51,6 +52,8 @@ export type UpdateNewPostTextActionType = {
 export type AddPostActionType = ReturnType<typeof addPostActionCreator>
 export type SendNewMessageActionType = ReturnType<typeof sendNewMessageAC>
 export type UpdateNewMessageActionType = ReturnType<typeof updateNewMessageAC>
+export type SetCurrentPageAT = ReturnType<typeof setCurrentPageAC>
+export type SetTotalCountAT = ReturnType<typeof setTotalCountAC>
 
 export type FollowAT = {
     type: 'FOLLOW'
@@ -65,7 +68,15 @@ export type SetUsersAT = {
     users: UserType[]
 }
 
-export type ActionTypes = UpdateNewPostTextActionType | AddPostActionType | SendNewMessageActionType | UpdateNewMessageActionType | FollowAT | UnfollowAT | SetUsersAT
+export type ActionTypes = UpdateNewPostTextActionType
+    | AddPostActionType
+    | SendNewMessageActionType
+    | UpdateNewMessageActionType
+    | FollowAT
+    | UnfollowAT
+    | SetUsersAT
+    | SetCurrentPageAT
+    | SetTotalCountAT
 
 export let store: StoreType = {
     _state: {
@@ -112,9 +123,9 @@ export let store: StoreType = {
     },
 
     dispatch(action) {
-        this._state.profilePage = profileReducer( this._state.profilePage, action )
-        this._state.dialogsPage = dialogsReducer( this._state.dialogsPage, action )
-        this._state.sidebar = sidebarReducer( this._state.sidebar, action )
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action)
 
         this._callSubscriber(this._state)
 
