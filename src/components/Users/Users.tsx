@@ -1,12 +1,6 @@
 import React from 'react';
-import s from './Users.module.css'
-import {dispatchPropsType} from "./UsersContainer";
-import axios from "axios";
-import UserPhoto from '../../assets/images/user.png'
-
-export type UsersPropsType = {
-    users: UserType[]
-} & dispatchPropsType
+import s from "./Users.module.css";
+import UserPhoto from "../../assets/images/user.png";
 export type UserType = {
     id: number
     followed: boolean
@@ -23,17 +17,33 @@ export type UserType = {
     }
 }
 
-export const Users = (props: UsersPropsType) => {
-    if (props.users.length === 0) {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
-            .then(response => {
-            props.setUsers(response.data.items)
-        })
+type UsersNewPropsType = {
+    totalUsersCount: number
+    pageSize: number
+    currentPage: number
+    onPageChanged: (page: number) => void
+    unfollow: (userId: number) => void
+    follow: (userId: number) => void
+    users: UserType[]
+}
+export const Users = (props: UsersNewPropsType) => {
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+    let pages = []
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i)
     }
-
     return (
         <div>
-            {props.users.map(u => {
+            <div>
+                {pages.map( (p,index) => {
+                    return (
+                        <span key={index}  className={`${s.page} + ${props.currentPage === p ? s.selected : ''}`}
+                               onClick={() => props.onPageChanged(p)}> {p}</span>
+                    )
+                })}
+
+            </div>
+            {props.users.map((u: UserType) => {
                     const imgUserLogic = u.photos.small !== null ? u.photos.small : UserPhoto
                     const unfollowHandler = () => {
                         props.unfollow(u.id)

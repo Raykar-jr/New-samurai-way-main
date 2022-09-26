@@ -1,8 +1,8 @@
 import {addPostActionCreator, profileReducer} from "./profileReducer";
 import {dialogsReducer, sendNewMessageAC, updateNewMessageAC} from "./dialogsReducer";
 import {sidebarReducer} from "./sidebarReducer";
-import {UserType} from "../components/Users/Users";
 import {setCurrentPageAC, setTotalCountAC} from "./userReducer";
+import {UserType} from "../components/Users/Users";
 
 
 export type DialogsPageType = {
