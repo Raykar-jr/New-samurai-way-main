@@ -1,7 +1,7 @@
 import {addPostActionCreator, profileReducer} from "./profileReducer";
 import {dialogsReducer, sendNewMessageAC, updateNewMessageAC} from "./dialogsReducer";
 import {sidebarReducer} from "./sidebarReducer";
-import {setCurrentPageAC, setTotalCountAC, toggleIsFetchingAC} from "./userReducer";
+import {setCurrentPage, setTotalCount, toggleIsFetching} from "./userReducer";
 import {UserType} from "../components/Users/Users";
 
 
@@ -52,9 +52,9 @@ export type UpdateNewPostTextActionType = {
 export type AddPostActionType = ReturnType<typeof addPostActionCreator>
 export type SendNewMessageActionType = ReturnType<typeof sendNewMessageAC>
 export type UpdateNewMessageActionType = ReturnType<typeof updateNewMessageAC>
-export type SetCurrentPageAT = ReturnType<typeof setCurrentPageAC>
-export type SetTotalCountAT = ReturnType<typeof setTotalCountAC>
-export type ToggleIsFetching = ReturnType<typeof toggleIsFetchingAC>
+export type SetCurrentPageAT = ReturnType<typeof setCurrentPage>
+export type SetTotalCountAT = ReturnType<typeof setTotalCount>
+export type ToggleIsFetching = ReturnType<typeof toggleIsFetching>
 
 export type FollowAT = {
     type: 'FOLLOW'
