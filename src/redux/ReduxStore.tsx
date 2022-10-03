@@ -20,5 +20,8 @@ type RootState = typeof rootReducer; // New
 export let store: Store<ReduxStateType, ActionTypes> = createStore(rootReducer)
 export type ReduxStateType = ReturnType<RootState>
 
+// @ts-ignore
+window.store = store
+
 
 

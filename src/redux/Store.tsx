@@ -1,33 +1,34 @@
-import {addPostActionCreator, profileReducer} from "./profileReducer";
+import {addPostActionCreator, profileReducer, setUserProfile, updateNewPostTextActionCreator} from "./profileReducer";
 import {dialogsReducer, sendNewMessageAC, updateNewMessageAC} from "./dialogsReducer";
 import {sidebarReducer} from "./sidebarReducer";
 import {setCurrentPage, setTotalCount, toggleIsFetching} from "./userReducer";
 import {UserType} from "../components/Users/Users";
 
 
-export type DialogsPageType = {
+type DialogsPageType = {
     messages: MessageType[]
     dialogs: DialogType[]
     newMessageText: string
 }
-export type ProfilePageType = {
+type ProfilePageType = {
     postData: PostDataType[]
     newPostText: string
+    profile: null
 }
 export type SidebarType = {
     id: number
     name: string
 }
-export type PostDataType = {
+ type PostDataType = {
     id: number
     message: string
     likeCounts: number
 }
-export type DialogType = {
+type DialogType = {
     id: number
     name: string
 }
-export type MessageType = {
+type MessageType = {
     id: number
     message: string
 }
@@ -44,10 +45,7 @@ export type StoreType = {
     subscribe: (observer: (state: StateType) => void) => void // ????
     dispatch: (action: ActionTypes) => void
 }
-export type UpdateNewPostTextActionType = {
-    type: 'UPDATE-NEW-POST-TEXT'
-    text: string
-}
+export type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreator>
 
 export type AddPostActionType = ReturnType<typeof addPostActionCreator>
 export type SendNewMessageActionType = ReturnType<typeof sendNewMessageAC>
@@ -55,6 +53,7 @@ export type UpdateNewMessageActionType = ReturnType<typeof updateNewMessageAC>
 export type SetCurrentPageAT = ReturnType<typeof setCurrentPage>
 export type SetTotalCountAT = ReturnType<typeof setTotalCount>
 export type ToggleIsFetching = ReturnType<typeof toggleIsFetching>
+export type SetUserProfile = ReturnType<typeof setUserProfile>
 
 export type FollowAT = {
     type: 'FOLLOW'
@@ -79,6 +78,7 @@ export type ActionTypes = UpdateNewPostTextActionType
     | SetCurrentPageAT
     | SetTotalCountAT
     | ToggleIsFetching
+    | SetUserProfile
 
 export let store: StoreType = {
     _state: {
@@ -88,6 +88,7 @@ export let store: StoreType = {
                 {id: 2, message: 'It is my first post', likeCounts: 13},
             ],
             newPostText: '',
+            profile: null
 
         },
         dialogsPage: {

@@ -1,6 +1,7 @@
 import React from 'react';
 import s from "./Users.module.css";
 import UserPhoto from "../../assets/images/user.png";
+import {NavLink} from "react-router-dom";
 export type UserType = {
     id: number
     followed: boolean
@@ -55,7 +56,9 @@ export const Users = (props: UsersNewPropsType) => {
                         <div key={u.id}>
                 <span>
                     <div>
+                        <NavLink to={'/profile/' + u.id}>
                         <img className={s.photo} src={imgUserLogic} alt=""/>
+                        </NavLink>
                     </div>
                     <div>
                         {u.followed

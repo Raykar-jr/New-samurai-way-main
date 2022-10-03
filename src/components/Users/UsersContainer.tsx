@@ -5,7 +5,7 @@ import {
     follow,
     setCurrentPage,
     setTotalCount,
-    setUsers,
+    setUsers, stateUsersType,
     toggleIsFetching,
     unfollow
 } from "../../redux/userReducer";
@@ -54,13 +54,7 @@ export class UserWithApi extends React.Component<any, any> {
     }
 }
 
-type mapStateToPropsType = {
-    users: UserType[]
-    pageSize: number
-    totalUsersCount: number
-    currentPage: number
-    isFetching: boolean
-}
+type MapStateToPropsType = stateUsersType
 export type dispatchPropsType = {
     follow: (userID: number) => void
     unfollow: (userID: number) => void
@@ -70,7 +64,7 @@ export type dispatchPropsType = {
     toggleIsFetching: (isFetching: boolean) => void
 }
 
-const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
@@ -104,3 +98,4 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
 
 export const UsersContainer = connect(mapStateToProps,
     {follow,unfollow,setUsers,setCurrentPage,setTotalCount,toggleIsFetching })(UserWithApi)
+

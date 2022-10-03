@@ -1,10 +1,10 @@
 import React from 'react';
-import {sendNewMessageAC, updateNewMessageAC} from "../../redux/dialogsReducer";
+import {DialogsInitialStateType, sendNewMessageAC, updateNewMessageAC} from "../../redux/dialogsReducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/ReduxStore";
 import {Dispatch} from "redux";
-import {DialogsPageType} from "../../redux/Store";
+
 
 // export const DialogsContainer = () => {
 //     return (
@@ -31,7 +31,7 @@ import {DialogsPageType} from "../../redux/Store";
 // };
 
 type MapStateToPropsType = {
-    state: DialogsPageType
+    state: DialogsInitialStateType
 }
 type DispatchPropsType = {
     addNewMessage: () => void
