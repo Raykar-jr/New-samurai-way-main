@@ -1,9 +1,22 @@
 .logo {
     width: 100px;
+    border-radius: 50%;
+    padding: 3px;
 }
 
 .header {
     grid-area: h;
     background-color: #1abc9c;
 
+}
+.loginBlock {
+    float: right;
+
+}
+.loginLink {
+    text-decoration: none;
+    padding: 5px;
+}
+.loginBlock div {
+    padding: 5px;
 }

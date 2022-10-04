@@ -2,6 +2,7 @@ import React from 'react';
 import s from "./Users.module.css";
 import UserPhoto from "../../assets/images/user.png";
 import {NavLink} from "react-router-dom";
+
 export type UserType = {
     id: number
     followed: boolean
@@ -36,10 +37,10 @@ export const Users = (props: UsersNewPropsType) => {
     return (
         <div>
             <div>
-                {pages.map( (p,index) => {
+                {pages.map((p, index) => {
                     return (
-                        <span key={index}  className={`${s.page} + ${props.currentPage === p ? s.selected : ''}`}
-                               onClick={() => props.onPageChanged(p)}> {p}</span>
+                        <span key={index} className={`${s.page} + ${props.currentPage === p ? s.selected : ''}`}
+                              onClick={() => props.onPageChanged(p)}> {p}</span>
                     )
                 })}
 
@@ -66,7 +67,6 @@ export const Users = (props: UsersNewPropsType) => {
                             : <button onClick={followHandler}>Follow</button>}
                     </div>
                 </span>
-
                             <span>
                     <span>
                         <div>{u.name}</div>
