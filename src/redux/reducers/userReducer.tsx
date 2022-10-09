@@ -1,11 +1,12 @@
-import {ActionTypes} from "../Store";
 import {UserType} from "../../components/Users/Users";
+import {ActionTypes} from "../actionTypes";
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT'
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
+const TOGGLE_IS_FOLLOWING = 'TOGGLE_IS_FOLLOWING'
 
 export type stateUsersType = {
     users: UserType[]
@@ -13,6 +14,7 @@ export type stateUsersType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: Array<number>
 }
 
 let initialState: stateUsersType = {
@@ -21,6 +23,7 @@ let initialState: stateUsersType = {
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
+    followingInProgress: []
 }
 
 export const userReducer = (state: stateUsersType = initialState, action: ActionTypes): stateUsersType => {
@@ -37,6 +40,11 @@ export const userReducer = (state: stateUsersType = initialState, action: Action
             return {...state, totalUsersCount: action.totalCount }
         case TOGGLE_IS_FETCHING:
             return {...state, isFetching: action.isFetching}
+        case TOGGLE_IS_FOLLOWING:
+            return {...state, followingInProgress:
+                    action.isFetching
+                    ? [...state.followingInProgress, action.userId]
+                    : state.followingInProgress.filter(id => id !== action.userId)}
         default:
             return state;
     }
@@ -59,4 +67,5 @@ export const setTotalCount = (totalCount: number) => {
 export const toggleIsFetching = (isFetching: boolean) => {
     return {type: TOGGLE_IS_FETCHING, isFetching} as const
 }
+export const toggleIsFollowing = (isFetching: boolean, userId: number) => ({type: TOGGLE_IS_FOLLOWING, isFetching, userId} as const)
 

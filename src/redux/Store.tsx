@@ -15,7 +15,7 @@ type ProfilePageType = {
     newPostText: string
     profile: null
 }
-export type SidebarType = {
+ type SidebarType = {
     id: number
     name: string
 }
@@ -45,15 +45,14 @@ export type StoreType = {
     subscribe: (observer: (state: StateType) => void) => void // ????
     dispatch: (action: ActionTypes) => void
 }
-export type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreator>
-
-export type AddPostActionType = ReturnType<typeof addPostActionCreator>
-export type SendNewMessageActionType = ReturnType<typeof sendNewMessageAC>
-export type UpdateNewMessageActionType = ReturnType<typeof updateNewMessageAC>
-export type SetCurrentPageAT = ReturnType<typeof setCurrentPage>
-export type SetTotalCountAT = ReturnType<typeof setTotalCount>
-export type ToggleIsFetching = ReturnType<typeof toggleIsFetching>
-export type SetUserProfile = ReturnType<typeof setUserProfile>
+type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreator>
+type AddPostActionType = ReturnType<typeof addPostActionCreator>
+type SendNewMessageActionType = ReturnType<typeof sendNewMessageAC>
+type UpdateNewMessageActionType = ReturnType<typeof updateNewMessageAC>
+type SetCurrentPageAT = ReturnType<typeof setCurrentPage>
+type SetTotalCountAT = ReturnType<typeof setTotalCount>
+type ToggleIsFetching = ReturnType<typeof toggleIsFetching>
+type SetUserProfile = ReturnType<typeof setUserProfile>
 
 export type FollowAT = {
     type: 'FOLLOW'
@@ -68,7 +67,7 @@ export type SetUsersAT = {
     users: UserType[]
 }
 
-export type ActionTypes = UpdateNewPostTextActionType
+type ActionTypes = UpdateNewPostTextActionType
     | AddPostActionType
     | SendNewMessageActionType
     | UpdateNewMessageActionType
