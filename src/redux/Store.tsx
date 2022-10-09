@@ -1,7 +1,7 @@
-import {addPostActionCreator, profileReducer, setUserProfile, updateNewPostTextActionCreator} from "./profileReducer";
-import {dialogsReducer, sendNewMessageAC, updateNewMessageAC} from "./dialogsReducer";
-import {sidebarReducer} from "./sidebarReducer";
-import {setCurrentPage, setTotalCount, toggleIsFetching} from "./userReducer";
+import {addPostActionCreator, profileReducer, setUserProfile, updateNewPostTextActionCreator} from "./reducers/profileReducer";
+import {dialogsReducer, sendNewMessageAC, updateNewMessageAC} from "./reducers/dialogsReducer";
+import {sidebarReducer} from "./reducers/sidebarReducer";
+import {setCurrentPage, setTotalCount, toggleIsFetching} from "./reducers/userReducer";
 import {UserType} from "../components/Users/Users";
 
 

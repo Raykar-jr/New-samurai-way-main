@@ -1,10 +1,10 @@
 import React from 'react';
 import {combineReducers, createStore} from "redux";
-import {profileReducer} from "./profileReducer";
-import {dialogsReducer} from "./dialogsReducer";
-import {sidebarReducer} from "./sidebarReducer";
-import {userReducer} from "./userReducer";
-import {authReducer} from "./authReducer";
+import {profileReducer} from "./reducers/profileReducer";
+import {dialogsReducer} from "./reducers/dialogsReducer";
+import {sidebarReducer} from "./reducers/sidebarReducer";
+import {userReducer} from "./reducers/userReducer";
+import {authReducer} from "./reducers/authReducer";
 
 let rootReducer = combineReducers({
     profilePage: profileReducer,

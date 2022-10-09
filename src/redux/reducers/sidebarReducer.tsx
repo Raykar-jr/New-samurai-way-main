@@ -1,4 +1,4 @@
-import {ActionTypes, SidebarType} from "./Store";
+import {ActionTypes, SidebarType} from "../Store";
 
 const initialState = [
     {id: 1, name: 'Ruslan'},

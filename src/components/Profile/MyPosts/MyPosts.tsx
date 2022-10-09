@@ -1,7 +1,7 @@
 import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css'
 import {Post} from "./Post/Post";
-import {PostDataType} from "../../../redux/profileReducer";
+import {PostDataType} from "../../../redux/reducers/profileReducer";
 
 
 

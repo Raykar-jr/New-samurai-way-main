@@ -1,4 +1,4 @@
-import {ActionTypes} from "./Store";
+import {ActionTypes} from "../Store";
 
 export type DialogsInitialStateType = typeof initialState
 export type DialogType = {
