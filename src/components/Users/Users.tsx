@@ -2,7 +2,8 @@ import React from 'react';
 import s from "./Users.module.css";
 import UserPhoto from "../../assets/images/user.png";
 import {NavLink} from "react-router-dom";
-import {usersAPI} from "../../api/api";
+import {Dispatch} from "redux";
+
 
 
 
@@ -27,11 +28,10 @@ type UsersNewPropsType = {
     pageSize: number
     currentPage: number
     onPageChanged: (page: number) => void
-    unfollow: (userId: number) => void
-    follow: (userId: number) => void
     users: UserType[]
     followingInProgress: Array<number>
-    toggleIsFollowing: (isFetching: boolean, userId: number) => void
+    followThunkCreator: (userId: number) => (dispatch: Dispatch) => void
+    unfollowThunkCreator: (userId: number) => (dispatch: Dispatch) => void
 }
 export const Users = (props: UsersNewPropsType) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
@@ -53,22 +53,24 @@ export const Users = (props: UsersNewPropsType) => {
             {props.users.map((u: UserType) => {
                     const imgUserLogic = u.photos.small !== null ? u.photos.small : UserPhoto
                     const unfollowHandler = () => {
-                        props.toggleIsFollowing(true, u.id)
+                        props.unfollowThunkCreator(u.id)
+                        /*props.toggleIsFollowing(true, u.id)
                         usersAPI.unfollowUser(u.id).then(data => {
                                 if (data.resultCode === 0) {
                                     props.unfollow(u.id)
                                 }
                             props.toggleIsFollowing(false, u.id)
-                            })
+                            })*/
                     }
                     const followHandler = () => {
-                        props.toggleIsFollowing(true, u.id)
+                        props.followThunkCreator(u.id)
+                       /* props.toggleIsFollowing(true, u.id)
                         usersAPI.followUser(u.id).then(data => {
                                if (data.resultCode === 0) {
                                    props.follow(u.id)
                                }
                             props.toggleIsFollowing(false, u.id)
-                            })
+                            })*/
                     }
                     return (
                         <div key={u.id}>
