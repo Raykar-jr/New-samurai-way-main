@@ -3,15 +3,12 @@ import s from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {DialogsInitialStateType} from "../../redux/reducers/dialogsReducer";
-import {Redirect} from "react-router-dom";
 
 
 export type DialogPropsType = {
     state: DialogsInitialStateType
-    isAuth: boolean
     addNewMessage: () => void
     updateNewMessage: (textMessage: string) => void
-
 }
 
 const Dialogs: React.FC<DialogPropsType> = (props) => {
@@ -25,18 +22,17 @@ const Dialogs: React.FC<DialogPropsType> = (props) => {
     //     }
     // }
 
-/*    let refForTextarea = React.createRef<HTMLTextAreaElement>()*/ // Своего рода костыль?) Создаёт ссылку-объект
+    /*    let refForTextarea = React.createRef<HTMLTextAreaElement>()*/ // Своего рода костыль?) Создаёт ссылку-объект
     //let refForTextarea = useRef<HTMLTextAreaElement>() В дальнейшем будем использовать
     const sendMessageHandler = () => {
         props.addNewMessage()
     }
-const onChangeTextAreaHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    const onChangeTextAreaHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
         let textMessage = event.target.value
-    if (textMessage) {
-        props.updateNewMessage(textMessage)
+        if (textMessage) {
+            props.updateNewMessage(textMessage)
+        }
     }
-}
-    if (!props.isAuth) return <Redirect to='/login'/>
     return (
         <div className={s.dialogs}>
             <div className={s.dialogItems}>
