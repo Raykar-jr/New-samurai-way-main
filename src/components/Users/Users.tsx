@@ -5,8 +5,6 @@ import {NavLink} from "react-router-dom";
 import {Dispatch} from "redux";
 
 
-
-
 export type UserType = {
     id: number
     followed: boolean
@@ -51,39 +49,26 @@ export const Users = (props: UsersNewPropsType) => {
 
             </div>
             {props.users.map((u: UserType) => {
-                    const imgUserLogic = u.photos.small !== null ? u.photos.small : UserPhoto
+                    const imgUser = u.photos.small !== null ? u.photos.small : UserPhoto
+                    const isDisabled = props.followingInProgress.some(id => id === u.id)
                     const unfollowHandler = () => {
                         props.unfollowThunkCreator(u.id)
-                        /*props.toggleIsFollowing(true, u.id)
-                        usersAPI.unfollowUser(u.id).then(data => {
-                                if (data.resultCode === 0) {
-                                    props.unfollow(u.id)
-                                }
-                            props.toggleIsFollowing(false, u.id)
-                            })*/
                     }
                     const followHandler = () => {
                         props.followThunkCreator(u.id)
-                       /* props.toggleIsFollowing(true, u.id)
-                        usersAPI.followUser(u.id).then(data => {
-                               if (data.resultCode === 0) {
-                                   props.follow(u.id)
-                               }
-                            props.toggleIsFollowing(false, u.id)
-                            })*/
                     }
                     return (
                         <div key={u.id}>
                 <span>
                     <div>
                         <NavLink to={'/profile/' + u.id}>
-                        <img className={s.photo} src={imgUserLogic} alt=""/>
+                        <img className={s.photo} src={imgUser} alt=""/>
                         </NavLink>
                     </div>
                     <div>
                         {u.followed
-                            ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={unfollowHandler}>Unfollow</button>
-                            : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={followHandler}>Follow</button>}
+                            ? <button disabled={isDisabled} onClick={unfollowHandler}>Unfollow</button>
+                            : <button disabled={isDisabled} onClick={followHandler}>Follow</button>}
                     </div>
                 </span>
                             <span>
