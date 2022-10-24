@@ -1,10 +1,13 @@
 import React from 'react';
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {MyPostsContainer} from "./MyPosts/Post/MyPostsContainer";
+import {Dispatch} from "redux";
 
 
 type ProfilePropsType = {
     profile: ProfileType
+    status: string
+    updateUserStatus: (status: string) => (dispatch: Dispatch) => void
 }
 export type ProfileType = {
     aboutMe: null | string,
@@ -30,7 +33,10 @@ export type ProfileType = {
 export const Profile = (props: ProfilePropsType) => {
     return (
         <div>
-            <ProfileInfo profile={props.profile}/>
+            <ProfileInfo profile={props.profile}
+                         status={props.status}
+                         updateUserStatus={props.updateUserStatus}
+            />
             <MyPostsContainer/>
         </div>
     )
