@@ -1,6 +1,6 @@
-import {addPostActionCreator, profileReducer, setUserProfile, updateNewPostTextActionCreator} from "./reducers/profileReducer";
-import {dialogsReducer, sendNewMessageAC, updateNewMessageAC} from "./reducers/dialogsReducer";
-import {sidebarReducer} from "./reducers/sidebarReducer";
+import React from 'react'
+/*import {addPostActionCreator, setUserProfile, updateNewPostTextActionCreator} from "./reducers/profileReducer";
+import {sendNewMessageAC} from "./reducers/dialogsReducer";
 import {setCurrentPage, setTotalCount, toggleIsFetching} from "./reducers/userReducer";
 import {UserType} from "../components/Users/Users";
 
@@ -15,11 +15,11 @@ type ProfilePageType = {
     newPostText: string
     profile: null
 }
- type SidebarType = {
+type SidebarType = {
     id: number
     name: string
 }
- type PostDataType = {
+type PostDataType = {
     id: number
     message: string
     likeCounts: number
@@ -48,7 +48,6 @@ export type StoreType = {
 type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreator>
 type AddPostActionType = ReturnType<typeof addPostActionCreator>
 type SendNewMessageActionType = ReturnType<typeof sendNewMessageAC>
-type UpdateNewMessageActionType = ReturnType<typeof updateNewMessageAC>
 type SetCurrentPageAT = ReturnType<typeof setCurrentPage>
 type SetTotalCountAT = ReturnType<typeof setTotalCount>
 type ToggleIsFetching = ReturnType<typeof toggleIsFetching>
@@ -70,7 +69,6 @@ export type SetUsersAT = {
 type ActionTypes = UpdateNewPostTextActionType
     | AddPostActionType
     | SendNewMessageActionType
-    | UpdateNewMessageActionType
     | FollowAT
     | UnfollowAT
     | SetUsersAT
@@ -126,15 +124,15 @@ export let store: StoreType = {
 
     dispatch(action) {
         // this._state.profilePage = profileReducer(this._state.profilePage, action)
-        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
-        this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+        // this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        // this._state.sidebar = sidebarReducer(this._state.sidebar, action)
 
-        this._callSubscriber(this._state)
+        // this._callSubscriber(this._state)
 
     },
 
 
-}
+}*/
 
 
 

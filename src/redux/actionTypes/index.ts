@@ -2,16 +2,13 @@ import {
     addPostActionCreator,
     setUserProfile,
     setUserStatus,
-    updateNewPostTextActionCreator
 } from "../reducers/profileReducer";
-import {sendNewMessageAC, updateNewMessageAC} from "../reducers/dialogsReducer";
+import {sendNewMessageAC} from "../reducers/dialogsReducer";
 import {setCurrentPage, setTotalCount, toggleIsFetching, toggleIsFollowing} from "../reducers/userReducer";
 import {UserType} from "../../components/Users/Users";
 
-export type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreator>
 export type AddPostActionType = ReturnType<typeof addPostActionCreator>
 export type SendNewMessageActionType = ReturnType<typeof sendNewMessageAC>
-export type UpdateNewMessageActionType = ReturnType<typeof updateNewMessageAC>
 export type SetCurrentPageAT = ReturnType<typeof setCurrentPage>
 export type SetTotalCountAT = ReturnType<typeof setTotalCount>
 export type ToggleIsFetching = ReturnType<typeof toggleIsFetching>
@@ -23,10 +20,9 @@ export type FollowAT = { type: 'FOLLOW', userID: number }
 export type UnfollowAT = { type: 'UNFOLLOW', userID: number }
 export type SetUsersAT = { type: 'SET_USERS', users: UserType[] }
 
-export type ActionTypes = UpdateNewPostTextActionType
+export type ActionTypes =
     | AddPostActionType
     | SendNewMessageActionType
-    | UpdateNewMessageActionType
     | FollowAT
     | UnfollowAT
     | SetUsersAT

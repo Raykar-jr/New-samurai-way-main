@@ -1,14 +1,14 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import s from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {DialogsInitialStateType} from "../../redux/reducers/dialogsReducer";
+import {DialogsReduxForm, FormDataDialogType} from "./Message/DialogsForm";
 
 
 export type DialogPropsType = {
     state: DialogsInitialStateType
-    addNewMessage: () => void
-    updateNewMessage: (textMessage: string) => void
+    addNewMessage: (textMessage: string) => void
 }
 
 const Dialogs: React.FC<DialogPropsType> = (props) => {
@@ -21,17 +21,11 @@ const Dialogs: React.FC<DialogPropsType> = (props) => {
     //         alert(message)
     //     }
     // }
-
     /*    let refForTextarea = React.createRef<HTMLTextAreaElement>()*/ // Своего рода костыль?) Создаёт ссылку-объект
     //let refForTextarea = useRef<HTMLTextAreaElement>() В дальнейшем будем использовать
-    const sendMessageHandler = () => {
-        props.addNewMessage()
-    }
-    const onChangeTextAreaHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        let textMessage = event.target.value
-        if (textMessage) {
-            props.updateNewMessage(textMessage)
-        }
+
+    const addNewMessage = (formData: FormDataDialogType) => {
+       props.addNewMessage(formData.dialogMessage)
     }
     return (
         <div className={s.dialogs}>
@@ -41,12 +35,7 @@ const Dialogs: React.FC<DialogPropsType> = (props) => {
 
             <div className={s.messages}>
                 {messageElements}
-                <textarea onChange={onChangeTextAreaHandler}
-                          value={props.state.newMessageText}
-                ></textarea>
-                <br/>
-                <button onClick={sendMessageHandler}>Send message</button>
-
+                <DialogsReduxForm onSubmit={addNewMessage}/>
             </div>
         </div>
     );
