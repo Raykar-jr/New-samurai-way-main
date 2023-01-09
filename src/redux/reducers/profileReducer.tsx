@@ -1,13 +1,14 @@
 import {ActionTypes} from "../actionTypes";
 import {Dispatch} from "redux";
 import {profileAPI} from "../../api/api";
+import {v1} from "uuid";
 
 const ADD_POST = 'ADD-POST'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_USER_STATUS = 'SET_USER_STATUS'
 
 export type PostDataType = {
-    id: number
+    id: string
     message: string
     likeCounts: number
 }
@@ -24,8 +25,8 @@ export const setUserStatus = (status: string) => ({type: SET_USER_STATUS, status
 
 const initialState = {
     postData: [
-        {id: 1, message: 'Hello, how are you?', likeCounts: 12},
-        {id: 2, message: 'It is my first post', likeCounts: 13},
+        {id: v1(), message: 'Hello, how are you?', likeCounts: 12},
+        {id: v1(), message: 'It is my first post', likeCounts: 13},
     ] as PostDataType[],
     profile: null,
     status: '',
@@ -33,7 +34,7 @@ const initialState = {
 export const profileReducer = (state: ProfileInitialStateType = initialState, action: ActionTypes): ProfileInitialStateType => {
     switch (action.type) {
         case ADD_POST:
-            let newPost: PostDataType = {id: 3, message: action.newPostText, likeCounts: 0}
+            let newPost: PostDataType = {id: v1(), message: action.newPostText, likeCounts: 0}
             return {...state, postData: [...state.postData, newPost]}
         case SET_USER_PROFILE:
             return {...state, profile: action.profile}

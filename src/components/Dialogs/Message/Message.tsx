@@ -3,7 +3,7 @@ import React from "react";
 
 export type MessagePropsType = {
     content: string
-    id: number
+    id: string
 }
 
 export const Message = (props: MessagePropsType) => {

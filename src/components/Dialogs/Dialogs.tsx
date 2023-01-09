@@ -12,20 +12,17 @@ export type DialogPropsType = {
 }
 
 const Dialogs: React.FC<DialogPropsType> = (props) => {
-    const messageElements = props.state.messages.map(el => <Message key={el.id} content={el.message} id={el.id}/>)
-    const dialogElements = props.state.dialogs.map(el => <DialogItem key={el.id} name={el.name} id={el.id}/>)
+    const messageElements = props.state.messages.map(el => <Message key={el.id}
+                                                                    content={el.message}
+                                                                    id={el.id}
+    />)
+    const dialogElements = props.state.dialogs.map(el => <DialogItem key={el.id}
+                                                                     name={el.name}
+                                                                     id={el.id}/>)
 
-    // const addMessage = () => {
-    //     if (refForTextarea && refForTextarea.current) { // Проверка, что refForTextarea !== null
-    //         let message = refForTextarea.current.value // считывает значение с ссылки-объекта и присваивает его переменной
-    //         alert(message)
-    //     }
-    // }
-    /*    let refForTextarea = React.createRef<HTMLTextAreaElement>()*/ // Своего рода костыль?) Создаёт ссылку-объект
-    //let refForTextarea = useRef<HTMLTextAreaElement>() В дальнейшем будем использовать
 
     const addNewMessage = (formData: FormDataDialogType) => {
-       props.addNewMessage(formData.dialogMessage)
+        props.addNewMessage(formData.dialogMessage)
     }
     return (
         <div className={s.dialogs}>
