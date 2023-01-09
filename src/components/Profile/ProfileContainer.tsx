@@ -19,7 +19,8 @@ type MapStateToPropsType = {
 
 export class ProfileWithApi extends React.Component<any, any> {
     componentDidMount() {
-        const userId = this.props.match.params.userId | 2
+
+        const userId = this.props.match.params.userId || 25765
         this.props.getUserProfile(userId)
         this.props.getUserStatus(userId)
     }

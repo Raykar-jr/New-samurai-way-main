@@ -3,7 +3,6 @@ export const requiredField = (value: any) => {
     if (value) {
         return undefined
     }
-    console.log('Field is required')
     return 'Field is required'
 }
 
