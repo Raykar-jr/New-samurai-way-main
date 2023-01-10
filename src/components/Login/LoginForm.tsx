@@ -2,6 +2,7 @@ import React from 'react';
 import {Field, InjectedFormProps} from "redux-form";
 import {ElementCreator} from "../../comma/formsControls/FormsControls";
 import {requiredField} from "../../utilities/validators/validators";
+import s from '../../comma/formsControls/FormsControl.module.css'
 
 export type FormDataType = {
     email: string
@@ -39,6 +40,10 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
                 <button>
                     Login
                 </button>
+                {props.error &&
+                    <div className={s.commonError}>
+                        {props.error}
+                    </div>}
             </div>
         </form>
     );

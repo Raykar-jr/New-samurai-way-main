@@ -13,14 +13,18 @@ import {compose} from "redux";
 type MapStateToPropsType = {
     profile: ProfileType | null
     status: string
+    authorizedId: number | null
+    isAuth: boolean
 }
 
 /*type ProfileWithApiPropsType = RouteComponentProps<PathParamsType> & MapStateToPropsType*/
 
 export class ProfileWithApi extends React.Component<any, any> {
     componentDidMount() {
-
-        const userId = this.props.match.params.userId || 25765
+        let userId = this.props.match.params.userId
+        if (!userId) {
+            userId = this.props.authorizedId || 25765
+        }
         this.props.getUserProfile(userId)
         this.props.getUserStatus(userId)
     }
@@ -41,7 +45,9 @@ export class ProfileWithApi extends React.Component<any, any> {
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         profile: state.profilePage.profile,
-        status: state.profilePage.status
+        status: state.profilePage.status,
+        authorizedId: state.auth.id,
+        isAuth: state.auth.isAuth
     }
 }
 

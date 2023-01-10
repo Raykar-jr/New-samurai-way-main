@@ -23,7 +23,7 @@ let rootReducer = combineReducers({
 export type AppDispatch = ThunkDispatch<AppStateType, unknown, ActionTypes>
 
 export type AppThunkType<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, ActionTypes>
-
+// ThunkAction<void, IAppStore, unknown, AnyAction>
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<AppStateType> = useSelector
 

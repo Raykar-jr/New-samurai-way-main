@@ -1,6 +1,8 @@
 import {authAPI} from "../../api/api";
-import {Dispatch} from "redux";
-import {AppDispatch} from "../ReduxStore";
+import {AnyAction, Dispatch} from "redux";
+import { AppStateType} from "../ReduxStore";
+import {stopSubmit} from "redux-form";
+import {ThunkAction} from "redux-thunk";
 
 const SET_DATA_USER = 'SET_DATA_USER'
 
@@ -45,14 +47,31 @@ export const getAuthUserData = () => (dispatch: Dispatch) => {
     })
 }
 
-export const logIn = (email: string, password: string, rememberMe: boolean) => (dispatch: AppDispatch) => {
+export const logIn = (email: string, password: string, rememberMe: boolean):ThunkAction<void, AppStateType, unknown, AnyAction> =>
+    (dispatch, getState: () => AppStateType) => {
+        authAPI.login(email, password, rememberMe)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(getAuthUserData())
+                }
+                else {
+                    let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error'
+                    dispatch(stopSubmit('login', {_error: message}) )
+                }
+            })
+    }
+/*export const logIn = (email: string, password: string, rememberMe: boolean) => (dispatch: AppDispatch ) => {
     authAPI.login(email, password, rememberMe)
         .then(response => {
            if (response.data.resultCode === 0) {
                dispatch(getAuthUserData())
            }
+           else {
+               let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error'
+               dispatch(stopSubmit('login', {_error: message}) )
+           }
         })
-}
+}*/
 
 export const logOut = () => (dispatch: Dispatch) => {
     authAPI.logout()
