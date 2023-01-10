@@ -23,7 +23,11 @@ export class ProfileWithApi extends React.Component<any, any> {
     componentDidMount() {
         let userId = this.props.match.params.userId
         if (!userId) {
-            userId = this.props.authorizedId || 25765
+            userId = this.props.authorizedId
+            // || 25765
+            if(!userId) {
+                this.props.history.push('/login')
+            }
         }
         this.props.getUserProfile(userId)
         this.props.getUserStatus(userId)
