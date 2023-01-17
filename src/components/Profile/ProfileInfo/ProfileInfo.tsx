@@ -5,6 +5,7 @@ import {ProfileType} from "../Profile";
 import UserPhoto from "../../../assets/images/man.jpg";
 import {ProfileStatus} from "./ProfileStatus";
 import {Dispatch} from "redux";
+import {ProfileStatusWithHook} from "./ProfileStatusWithHook";
 
 type ProfileInfoPropsType = {
     profile: ProfileType
@@ -26,7 +27,8 @@ const ProfileInfo = ({profile, status, ...props}: ProfileInfoPropsType) => {
             <div className={s.description}>
                 <img className={s.userPhoto} src={profile.photos.small !== null ? profile.photos.small : UserPhoto}
                      alt=""/>
-                <ProfileStatus status={status} onChangeStatus={onChangeStatus}/>
+               {/* <ProfileStatus status={status} onChangeStatus={onChangeStatus}/>*/}
+                <ProfileStatusWithHook status={status} onChangeStatus={onChangeStatus}/>
                 <div>Обо мне: {profile.aboutMe}</div>
                 <div>В поисках работы: {profile.lookingForAJob.toString()}</div>
                 <div>Полное имя: {profile.fullName}</div>
