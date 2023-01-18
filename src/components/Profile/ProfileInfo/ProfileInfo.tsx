@@ -21,9 +21,6 @@ const ProfileInfo = ({profile, status, ...props}: ProfileInfoPropsType) => {
     }
     return (
         <div>
-            {/* <div>
-                <img src="https://media.istockphoto.com/photos/minsk-gate-to-the-city-picture-id1135449521?k=20&m=1135449521&s=612x612&w=0&h=B3RuC830SeFg3mJWr9fo6lOBchoj_USHBkE8twNhF_M=" alt=""/>
-            </div>*/}
             <div className={s.description}>
                 <img className={s.userPhoto} src={profile.photos.small !== null ? profile.photos.small : UserPhoto}
                      alt=""/>

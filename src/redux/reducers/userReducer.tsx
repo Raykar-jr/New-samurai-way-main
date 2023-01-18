@@ -19,7 +19,6 @@ export type stateUsersType = {
     isFetching: boolean
     followingInProgress: Array<number>
 }
-
 let initialState: stateUsersType = {
     users: [],
     pageSize: 5,
@@ -54,58 +53,42 @@ export const userReducer = (state: stateUsersType = initialState, action: Action
             return state;
     }
 }
-export const followSuccess = (userID: number) => {
-    return {type: FOLLOW, userID: userID}
-}
-export const unfollowSuccess = (userID: number) => {
-    return {type: UNFOLLOW, userID: userID}
-}
-export const setUsers = (users: UserType[]) => {
-    return {type: SET_USERS, users}
-}
-export const setCurrentPage = (currentPage: number) => {
-    return {type: SET_CURRENT_PAGE, currentPage} as const
-}
-export const setTotalCount = (totalCount: number) => {
-    return {type: SET_TOTAL_COUNT, totalCount} as const
-}
-export const toggleIsFetching = (isFetching: boolean) => {
-    return {type: TOGGLE_IS_FETCHING, isFetching} as const
-}
-export const toggleIsFollowing = (isFetching: boolean, userId: number) => ({type: TOGGLE_IS_FOLLOWING, isFetching, userId} as const)
+// actions
+export const followSuccess = (userID: number) => ({type: FOLLOW, userID})
+export const unfollowSuccess = (userID: number) => ({type: UNFOLLOW, userID})
+export const setUsers = (users: UserType[]) => ({type: SET_USERS, users})
+export const setCurrentPage = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage} as const)
+export const setTotalCount = (totalCount: number) => ({type: SET_TOTAL_COUNT, totalCount} as const)
+export const toggleIsFetching = (isFetching: boolean) => ({type: TOGGLE_IS_FETCHING, isFetching} as const)
+export const toggleIsFollowing = (isFetching: boolean, userId: number) => ({
+    type: TOGGLE_IS_FOLLOWING, isFetching,
+    userId
+} as const)
 
+// thunks
+export const getUsersThunkCreator = (currentPage: number, pageSize: number) => async (dispatch: Dispatch) => {
+    dispatch(toggleIsFetching(true))
+    let data = await usersAPI.getUsers(currentPage, pageSize)
+    dispatch(toggleIsFetching(false))
+    dispatch(setUsers(data.items))
+    dispatch(setTotalCount(data.totalCount / 300))
+}
 
-export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
-    return (dispatch: Dispatch) => {
-        dispatch(toggleIsFetching(true))
-
-        usersAPI.getUsers(currentPage, pageSize)
-            .then(data => {
-                dispatch(toggleIsFetching(false))
-                dispatch(setUsers(data.items))
-                dispatch(setTotalCount(data.totalCount / 300))
-            })
+export const followThunkCreator = (userId: number) => async (dispatch: Dispatch) => {
+    dispatch(toggleIsFollowing(true, userId))
+    let data = await usersAPI.followUser(userId)
+    if (data.resultCode === 0) {
+        dispatch(followSuccess(userId))
     }
+    dispatch(toggleIsFollowing(false, userId))
 }
-
-export const followThunkCreator = (userId: number) => (dispatch: Dispatch) => {
+export const unfollowThunkCreator = (userId: number) => async (dispatch: Dispatch) => {
     dispatch(toggleIsFollowing(true, userId))
-    usersAPI.followUser(userId).then(data => {
-        if (data.resultCode === 0) {
-           dispatch(followSuccess(userId))
-        }
-        dispatch(toggleIsFollowing(false, userId))
-    })
-}
-
-export const unfollowThunkCreator = (userId: number) => (dispatch: Dispatch) => {
-    dispatch(toggleIsFollowing(true, userId))
-    usersAPI.unfollowUser(userId).then(data => {
+    let data = await usersAPI.unfollowUser(userId)
         if (data.resultCode === 0) {
             dispatch(unfollowSuccess(userId))
         }
         dispatch(toggleIsFollowing(false, userId))
-    })
 }
 
 

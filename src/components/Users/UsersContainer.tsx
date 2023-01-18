@@ -14,24 +14,10 @@ import {Preloader} from "../../comma/Preloader/Preloader";
 export class UserWithApi extends React.Component<any, any> {
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
-       /* this.props.toggleIsFetching(true)
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-            .then(data => {
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(data.items)
-                this.props.setTotalCount(data.totalCount/300)
-            })*/
     }
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
         this.props.getUsers(pageNumber, this.props.pageSize)
-       /* this.props.toggleIsFetching(true)
-        usersAPI.getUsers(pageNumber, this.props.pageSize)
-            .then(data => {
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(data.items)
-            })*/
-
     }
     render () {
         return (

@@ -7,9 +7,12 @@ import {AppStateType} from "../../redux/ReduxStore";
 import {Redirect} from "react-router-dom";
 
 
+type LoginPropsType = {
+    isAuth: boolean
+    logIn: (email: string, password: string, rememberMe: boolean) => void
+}
 
-
-const Login = (props: any) => {
+const Login = (props: LoginPropsType) => {
     const onSubmit = (formData: FormDataType) => {
        const {email, password, rememberMe} = formData
         props.logIn(email, password, rememberMe)
