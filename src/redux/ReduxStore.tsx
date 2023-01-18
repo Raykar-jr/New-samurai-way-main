@@ -1,5 +1,5 @@
 import React from 'react';
-import {applyMiddleware, combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import {profileReducer} from "./reducers/profileReducer";
 import {dialogsReducer} from "./reducers/dialogsReducer";
 import {sidebarReducer} from "./reducers/sidebarReducer";
@@ -31,7 +31,11 @@ export const useAppSelector: TypedUseSelectorHook<AppStateType> = useSelector
 
 export type AppStateType = ReturnType<typeof rootReducer>
 
-export let store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
+// @ts-ignore
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+export let store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)));
+
+// export let store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
 
 
 // @ts-ignore
