@@ -14,13 +14,9 @@ export type PostDataType = {
 }
 type ProfileInitialStateType = typeof initialState
 
-export const addPostActionCreator  = (newPostText: string) => {
-    return { type: ADD_POST, newPostText } as const
-}
-
-export const setUserProfile = (profile: any) => {
-    return { type: SET_USER_PROFILE, profile } as const
-}
+// actions
+export const addPostActionCreator  = (newPostText: string) => ({ type: ADD_POST, newPostText } as const)
+export const setUserProfile = (profile: any) => ({ type: SET_USER_PROFILE, profile } as const)
 export const setUserStatus = (status: string) => ({type: SET_USER_STATUS, status} as const)
 
 const initialState = {
@@ -45,6 +41,7 @@ export const profileReducer = (state: ProfileInitialStateType = initialState, ac
     }
 }
 
+// thunks
 export const getUserProfile = (userId: number) => (dispatch: Dispatch) => {
     profileAPI.getUserProfile(userId)
         .then(data => {
@@ -52,20 +49,17 @@ export const getUserProfile = (userId: number) => (dispatch: Dispatch) => {
             }
         )
 }
-
 export const getUserStatus = (userId: number) => (dispatch: Dispatch) => {
     profileAPI.getUserStatus(userId)
         .then(data => {
             dispatch(setUserStatus(data))
         })
 }
-
 export const updateUserStatus = (status: string) => (dispatch: Dispatch) => {
     profileAPI.updateUserStatus(status)
         .then(res => {
             if (res.data.resultCode === 0) {
                 dispatch(setUserStatus(status))
             }
-
         })
 }
