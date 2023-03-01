@@ -1,6 +1,7 @@
 import React from 'react';
 import s from "./Users.module.css";
 
+
 type UsersPaginatorPropsType = {
     totalUsersCount: number
     pageSize: number

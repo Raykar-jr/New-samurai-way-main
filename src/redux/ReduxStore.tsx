@@ -37,6 +37,10 @@ export let store = createStore(rootReducer, composeEnhancers(applyMiddleware(thu
 
 // export let store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
 
+// export type AppThunkType<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, AnyAction>
+// позволяет типизировать возвращаемое значение ThunkCreator
+// const foo = (): AppThunkType  => (dispatch) => {...}
+
 
 // @ts-ignore
 window.store = store

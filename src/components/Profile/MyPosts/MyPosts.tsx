@@ -5,6 +5,7 @@ import {PostDataType} from "../../../redux/reducers/profileReducer";
 import {AddPostReduxForm, FormDataAddPostType} from "./AddPostForm";
 
 
+
 type MyPostsPropsType = {
     posts: PostDataType[]
     addPost: (newPostText: string) => void

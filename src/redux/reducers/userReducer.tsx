@@ -71,7 +71,7 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number) => a
     let data = await usersAPI.getUsers(currentPage, pageSize)
     dispatch(toggleIsFetching(false))
     dispatch(setUsers(data.items))
-    dispatch(setTotalCount(data.totalCount / 300))
+    dispatch(setTotalCount(data.totalCount/100))
 }
 
 export const followThunkCreator = (userId: number) => async (dispatch: Dispatch) => {

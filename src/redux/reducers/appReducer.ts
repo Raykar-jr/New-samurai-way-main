@@ -31,8 +31,7 @@ export const appReducer = (state: AppInitialStateType = initialState, action: Ac
 
 export const initializedSuccess = () => ({type: INITIALIZED_SUCCESS} as const)
 
-export const initializeApp = (): ThunkAction<void, AppStateType, unknown, AnyAction> =>
-    (dispatch, getState: () => AppStateType) => {
+export const initializeApp = (): ThunkAction<void, AppStateType, unknown, AnyAction> => dispatch => {
         let promise = dispatch(getAuthUserData())
         promise.then(() => {
             dispatch(initializedSuccess())
