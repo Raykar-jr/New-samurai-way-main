@@ -33,7 +33,7 @@ type UsersNewPropsType = {
 export const Users = (props: UsersNewPropsType) => {
     return (
         <div>
-            <UsersPaginator totalUsersCount={props.totalUsersCount}
+            <UsersPaginator totalItemsCount={props.totalUsersCount}
                             onPageChanged={props.onPageChanged}
                             currentPage={props.currentPage}
                             pageSize={props.pageSize}

@@ -21,7 +21,7 @@ export type stateUsersType = {
 }
 let initialState: stateUsersType = {
     users: [],
-    pageSize: 5,
+    pageSize: 10,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
@@ -71,7 +71,7 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number) => a
     let data = await usersAPI.getUsers(currentPage, pageSize)
     dispatch(toggleIsFetching(false))
     dispatch(setUsers(data.items))
-    dispatch(setTotalCount(data.totalCount/100))
+    dispatch(setTotalCount(data.totalCount/10))
 }
 
 export const followThunkCreator = (userId: number) => async (dispatch: Dispatch) => {

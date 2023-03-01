@@ -6,7 +6,27 @@
 
 .selected {
     font-weight: bold;
+    color: grey;
+    background: #312f2f;
+    border: 2px solid grey;
 }
+.page {
+    padding: 3px;
+    margin: 0 3px;
+    border: 2px solid grey;
+    border-radius: 20%;
+}
+
 .page:hover {
-cursor: pointer;
+    cursor: pointer;
+}
+.paginator {
+    margin: 5px 20px;
+}
+.pagButton {
+    margin: 0 5px;
+    padding: 0 5px;
+}
+.pagButton:hover {
+    cursor: pointer;
 }
