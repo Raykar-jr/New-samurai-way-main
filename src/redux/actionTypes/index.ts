@@ -1,5 +1,5 @@
 import {
-    addPostActionCreator,
+    addPostActionCreator, savePhotoAC,
     setUserProfile,
     setUserStatus,
 } from "../reducers/profileReducer";
@@ -15,6 +15,7 @@ export type ToggleIsFetching = ReturnType<typeof toggleIsFetching>
 export type SetUserProfile = ReturnType<typeof setUserProfile>
 export type ToggleIsFollowing = ReturnType<typeof toggleIsFollowing>
 export type SetUserStatus = ReturnType<typeof setUserStatus>
+export type savePhotoAT = ReturnType<typeof savePhotoAC>
 
 export type FollowAT = { type: 'FOLLOW', userID: number }
 export type UnfollowAT = { type: 'UNFOLLOW', userID: number }
@@ -32,3 +33,4 @@ export type ActionTypes =
     | SetUserProfile
     | ToggleIsFollowing
     | SetUserStatus
+    | savePhotoAT

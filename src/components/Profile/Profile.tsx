@@ -5,6 +5,8 @@ import {Dispatch} from "redux";
 
 
 type ProfilePropsType = {
+    saveMainPhoto: Function
+    isOwner: boolean
     profile: ProfileType
     status: string
     updateUserStatus: (status: string) => (dispatch: Dispatch) => void
@@ -34,6 +36,8 @@ export const Profile = (props: ProfilePropsType) => {
     return (
         <div>
             <ProfileInfo profile={props.profile}
+                         saveMainPhoto={props.saveMainPhoto}
+                         isOwner={props.isOwner}
                          status={props.status}
                          updateUserStatus={props.updateUserStatus}
             />

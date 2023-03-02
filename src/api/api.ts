@@ -53,9 +53,23 @@ export const profileAPI = {
         return instance.put(`/profile/status`, {status: status})
             .then(response => response.data)
 
+    },
+    savePhoto(photoFile: any) {
+        const formData = new FormData()
+        formData.append('image', photoFile)
+        return instance.put<ResponseType<{photos: {small: string, large: string}}>>('profile/photo', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
     }
 
 }
 
+export type ResponseType<D = {}> = {
+    resultCode: number
+    messages: string[]
+    data: D
+}
 
 

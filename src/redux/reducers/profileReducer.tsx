@@ -2,24 +2,32 @@ import {ActionTypes} from "../actionTypes";
 import {Dispatch} from "redux";
 import {profileAPI} from "../../api/api";
 import {v1} from "uuid";
+import {ProfileType} from "../../components/Profile/Profile";
 
 const ADD_POST = 'ADD-POST'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_USER_STATUS = 'SET_USER_STATUS'
+const SAVE_MAIN_PHOTO = 'SAVE_MAIN_PHOTO'
 
 export type PostDataType = {
     id: string
     message: string
     likeCounts: number
 }
-type ProfileInitialStateType = typeof initialState
-
+type ProfileInitialStateType = {
+    postData: PostDataType[]
+    profile: null | ProfileType
+    status: string
+}
 // actions
 export const addPostActionCreator = (newPostText: string) => ({type: ADD_POST, newPostText} as const)
 export const setUserProfile = (profile: any) => ({type: SET_USER_PROFILE, profile} as const)
 export const setUserStatus = (status: string) => ({type: SET_USER_STATUS, status} as const)
+export const savePhotoAC = (photo: PhotoType) => ({type: SAVE_MAIN_PHOTO, photo} as const)
 
-const initialState = {
+
+
+const initialState: ProfileInitialStateType = {
     postData: [
         {id: v1(), message: 'Hello, how are you?', likeCounts: 12},
         {id: v1(), message: 'It is my first post', likeCounts: 13},
@@ -36,6 +44,9 @@ export const profileReducer = (state: ProfileInitialStateType = initialState, ac
             return {...state, profile: action.profile}
         case SET_USER_STATUS:
             return {...state, status: action.status}
+        case SAVE_MAIN_PHOTO:
+            // @ts-ignore
+            return {...state, profile: {...state.profile, photos: action.photo} }
         default:
             return state
     }
@@ -55,5 +66,16 @@ export const updateUserStatus = (status: string) => async (dispatch: Dispatch) =
     if (response.resultCode === 0) {
         dispatch(setUserStatus(status))
     }
+}
+export const saveMainPhoto = (photoFile: File) => async (dispatch: Dispatch) => {
+    const response = await profileAPI.savePhoto(photoFile)
+    if (response.data.resultCode === 0) {
+        dispatch(savePhotoAC(response.data.data.photos))
+    }
+}
 
+// types
+type PhotoType = {
+       large: string
+       small: string
 }
