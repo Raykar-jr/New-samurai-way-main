@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/New-samurai-way-main/static/css/main.d20407a1.css",
+    "main.js": "/New-samurai-way-main/static/js/main.656bfb59.js",
+    "static/media/user.png": "/New-samurai-way-main/static/media/user.e93bb7e892accee65e30.png",
+    "static/media/man.jpg": "/New-samurai-way-main/static/media/man.d346c30e58d671fc44a1.jpg",
+    "static/media/Preloader.svg": "/New-samurai-way-main/static/media/Preloader.4d70e71f7d9b451eb8e5f70ee8199681.svg",
+    "index.html": "/New-samurai-way-main/index.html",
+    "main.d20407a1.css.map": "/New-samurai-way-main/static/css/main.d20407a1.css.map",
+    "main.656bfb59.js.map": "/New-samurai-way-main/static/js/main.656bfb59.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d20407a1.css",
+    "static/js/main.656bfb59.js"
+  ]
+}
