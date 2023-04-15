@@ -1,11 +1,10 @@
 import React, {ChangeEvent} from 'react';
 import s from './ProfileInfo.module.css'
-import {Preloader} from "../../../comma/Preloader/Preloader";
+import {Preloader} from "comma/Preloader/Preloader";
 import {ProfileType} from "../Profile";
 import UserPhoto from "../../../assets/images/man.jpg";
-// import {ProfileStatus} from "./ProfileStatus";
 import {Dispatch} from "redux";
-import {ProfileStatusWithHook} from "./ProfileStatusWithHook";
+import {ProfileData} from "./ProfileData/ProfileData";
 
 
 type ProfileInfoPropsType = {
@@ -35,26 +34,15 @@ const ProfileInfo = ({profile, status, isOwner, saveMainPhoto, ...props}: Profil
                 <div>
                     <label htmlFor="avatar">Choose image to upload avatar</label>
                     <br/>
-                    { isOwner && <input type='file' className={s.input} id='avatar' onChange={onSaveMainPhotoHandler}/> }
+                    {isOwner && <input type='file' className={s.input} id='avatar' onChange={onSaveMainPhotoHandler}/>}
                 </div>
-
-               {/* <ProfileStatus status={status} onChangeStatus={onChangeStatus}/>*/}
-                <ProfileStatusWithHook status={status} onChangeStatus={onChangeStatus}/>
-                <div>Обо мне: {profile.aboutMe}</div>
-                <div>В поисках работы: {profile.lookingForAJob.toString()}</div>
-                <div>Полное имя: {profile.fullName}</div>
-                <div>
-                    Мои контакты:
-                    <ul>
-                        <li><a href={profile.contacts.vk}>VK</a></li>
-                        <li><a href={profile.contacts.twitter}>Twitter</a></li>
-                        <li><a href={profile.contacts.instagram}>Instagram</a></li>
-                    </ul>
-                </div>
-
+                <ProfileData profile={profile} status={status} updateUserStatus={onChangeStatus}/>
             </div>
         </div>
     );
 };
 
 export default ProfileInfo;
+
+
+

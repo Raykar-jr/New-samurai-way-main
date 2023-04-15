@@ -1,4 +1,4 @@
-import {authAPI} from "../../api/api";
+import {authAPI} from "api/api";
 import {AnyAction, Dispatch} from "redux";
 import { AppStateType} from "../ReduxStore";
 import {stopSubmit} from "redux-form";
@@ -37,15 +37,7 @@ export const setAuthDataUser = (userId: number | null, login: string | null, ema
     return {type: SET_DATA_USER, payload: {userId, login, email, isAuth}} as const
 }
 
-/*export const getAuthUserData = () => (dispatch: Dispatch) => {
-    return authAPI.me()
-        .then(data => {
-        if (data.resultCode === 0) {
-            let {id, login, email} = data.data
-            dispatch(setAuthDataUser(id, login, email, true))
-        }
-    })
-}*/
+
 export const getAuthUserData = () => async (dispatch: Dispatch) => {
     let response = await authAPI.me()
             if (response.resultCode === 0) {
@@ -55,19 +47,7 @@ export const getAuthUserData = () => async (dispatch: Dispatch) => {
 
 }
 
-/*export const logIn = (email: string, password: string, rememberMe: boolean):ThunkAction<void, AppStateType, unknown, AnyAction> =>
-    (dispatch, getState: () => AppStateType) => {
-        authAPI.login(email, password, rememberMe)
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    dispatch(getAuthUserData())
-                }
-                else {
-                    let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error'
-                    dispatch(stopSubmit('login', {_error: message}) )
-                }
-            })
-    }*/
+
 export const logIn = (email: string, password: string, rememberMe: boolean):ThunkAction<void, AppStateType, unknown, AnyAction> =>
     async (dispatch, getState: () => AppStateType) => {
         let response = await authAPI.login(email, password, rememberMe)

@@ -1,60 +1,50 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
-import {Navbar} from "./components/Navbar/Nav";
-import {Route, withRouter} from "react-router-dom";
-import Settings from "./components/Settings/Settings";
-import Music from "./components/Music/Music";
-import News from "./components/News/News";
-import {UsersContainer} from "./components/Users/UsersContainer";
-import {HeaderContainer} from "./components/Header/HeaderContainer";
-import Login from "./components/Login/Login";
-import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
-import {ProfileContainer} from "./components/Profile/ProfileContainer";
-import {connect} from "react-redux";
-import {compose} from "redux";
-import {initializeApp} from "./redux/reducers/appReducer";
-import {AppStateType} from "./redux/ReduxStore";
-import {Preloader} from "./comma/Preloader/Preloader";
+import {Navbar} from "components/Navbar/Nav";
+import {useDispatch} from "react-redux";
+import {initializeApp} from "redux/reducers/appReducer";
+import {useAppSelector} from "redux/ReduxStore";
+import {Preloader} from "comma/Preloader/Preloader";
+import {Layout} from 'antd';
+import {HeaderContainer} from "components/Header/Header";
+import logo from 'assets/images/social-media-logo.png'
+import {RoutesPage} from "components/RoutesPage/RoutesPage";
 
 
-type AppProps = {
-    initializeApp: () => void
-    initialized: boolean
-}
+const {Header, Content, Footer, Sider} = Layout;
 
-class App extends React.Component<AppProps, any> {
+export const App = () => {
+    const dispatch = useDispatch()
+    const isAppInitialized = useAppSelector(state => state.app.initialized)
 
-    componentDidMount() {
-        this.props.initializeApp()
+    useEffect(() => {
+        dispatch(initializeApp())
+    }, [])
+
+    if (!isAppInitialized) {
+        return <Preloader/>
     }
-
-    render() {
-        if (!this.props.initialized) {
-            return <Preloader/>
-        }
-        return (
-            <div className="App-wrapper">
-                <HeaderContainer/>
+    return (
+        <Layout>
+            <Sider
+                style={{background: 'white'}}
+                breakpoint="lg"
+                collapsedWidth="0"
+            >
+                <img className='logo' src={logo} width={200} alt="logo"/>
                 <Navbar/>
-                <div className='app-wrapper-content'>
-                    <Route path='/dialogs' render={() => <DialogsContainer/>}/>
-                    <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
-                    <Route path='/news' render={() => <News/>}/>
-                    <Route path='/music' render={() => <Music/>}/>
-                    <Route path='/settings' render={() => <Settings/>}/>
-                    <Route path='/users' render={() => <UsersContainer/>}/>
-                    <Route path='/login' render={() => <Login/>}/>
-                </div>
-            </div>
-
-        );
-    }
+            </Sider>
+            <Layout>
+                <Header style={{padding: 0, background: 'white'}}>
+                    <HeaderContainer/>
+                </Header>
+                <Content style={{margin: '24px 16px 0'}}>
+                    <div style={{padding: 24, minHeight: 360, background: 'white'}}>
+                        <RoutesPage/>
+                    </div>
+                </Content>
+                <Footer style={{textAlign: 'center'}}>Social Network ©2023 Created by Kiryl Azaranka</Footer>
+            </Layout>
+        </Layout>
+    );
 }
-
-const mapStateToProps = (state: AppStateType) => ({
-    initialized: state.app.initialized
-})
-
-export default compose(
-    withRouter,
-    connect(mapStateToProps, {initializeApp}))(App) as React.ComponentClass;

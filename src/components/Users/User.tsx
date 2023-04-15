@@ -3,6 +3,8 @@ import UserPhoto from "../../assets/images/user.png";
 import {NavLink} from "react-router-dom";
 import s from "./Users.module.css";
 import {UserType} from "./Users";
+import {Button, Card} from "antd";
+import {CheckOutlined, CloseOutlined} from "@ant-design/icons";
 
 type UserPropsType = {
     unfollowThunkCreator: (userId: number) => void
@@ -16,38 +18,32 @@ export const User = ({user, ...props}: UserPropsType) => {
     const unfollowHandler = () => props.unfollowThunkCreator(user.id)
     const followHandler = () => props.followThunkCreator(user.id)
     return (
-        <div>
-                <span>
-                    <div>
-                        <NavLink to={'/profile/' + user.id}>
-                        <img className={s.photo} src={imgUser} alt=""/>
-                        </NavLink>
-                    </div>
-                    <div>
-                        {user.followed
-                            ? <button
-                                disabled={isDisabled}
-                                onClick={unfollowHandler}>
-                                Unfollow
-                            </button>
-                            : <button
-                                disabled={isDisabled}
-                                onClick={followHandler}>
-                                Follow
-                            </button>}
-                    </div>
-                </span>
-            <span>
-                    <span>
-                        <div>{user.name}</div>
-                        <div>{user.status && 'I am so lazy to write status'}</div>
-                    </span>
-                {/*<span>
-                        <div>Belarus</div>
-                        <div>Minsk</div>
-                    </span>*/}
-                </span>
-        </div>
+        <Card style={{width: 300, margin: '20px 0px', textAlign: 'center' }}
+              title={user.name}>
+
+            <div className={s.userBlock}>
+                <NavLink to={'/profile/' + user.id}>
+                    <img className={s.photo} src={imgUser} alt=""/>
+                </NavLink>
+                <div>
+                    {user.followed
+                        ? <Button
+                            icon={<CloseOutlined />}
+                            disabled={isDisabled}
+                            onClick={unfollowHandler}>
+                            Unfollow
+                        </Button>
+                        : <Button
+                            icon={<CheckOutlined />}
+                            disabled={isDisabled}
+                            onClick={followHandler}>
+                            Follow
+                        </Button>}
+                </div>
+
+                <p> {user.status || 'I am so lazy to write status'} </p>
+            </div>
+        </Card>
     );
 };
 

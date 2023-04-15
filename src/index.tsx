@@ -1,10 +1,10 @@
 import React from 'react';
 import './index.css';
 import ReactDOM from "react-dom";
-import {store} from "./redux/ReduxStore";
+import {store} from "redux/ReduxStore";
 import {Provider} from "react-redux";
-import App from "./App";
 import {HashRouter} from "react-router-dom";
+import {App} from "App";
 
 
 ReactDOM.render(

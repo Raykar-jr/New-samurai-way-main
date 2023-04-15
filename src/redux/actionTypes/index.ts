@@ -4,8 +4,8 @@ import {
     setUserStatus,
 } from "../reducers/profileReducer";
 import {sendNewMessageAC} from "../reducers/dialogsReducer";
-import {setCurrentPage, setTotalCount, toggleIsFetching, toggleIsFollowing} from "../reducers/userReducer";
-import {UserType} from "../../components/Users/Users";
+import {setCurrentPage, setPageSize, setTotalCount, toggleIsFetching, toggleIsFollowing} from "../reducers/userReducer";
+import {UserType} from "components/Users/Users";
 
 export type AddPostActionType = ReturnType<typeof addPostActionCreator>
 export type SendNewMessageActionType = ReturnType<typeof sendNewMessageAC>
@@ -16,6 +16,7 @@ export type SetUserProfile = ReturnType<typeof setUserProfile>
 export type ToggleIsFollowing = ReturnType<typeof toggleIsFollowing>
 export type SetUserStatus = ReturnType<typeof setUserStatus>
 export type savePhotoAT = ReturnType<typeof savePhotoAC>
+export type SetPageSizeAT = ReturnType<typeof setPageSize>
 
 export type FollowAT = { type: 'FOLLOW', userID: number }
 export type UnfollowAT = { type: 'UNFOLLOW', userID: number }
@@ -34,3 +35,4 @@ export type ActionTypes =
     | ToggleIsFollowing
     | SetUserStatus
     | savePhotoAT
+    | SetPageSizeAT

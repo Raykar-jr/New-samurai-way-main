@@ -1,28 +1,27 @@
 import React from 'react';
 import s from './Header.module.css'
-import {NavLink} from "react-router-dom";
+import {useAppSelector} from "redux/ReduxStore";
+import {useDispatch} from "react-redux";
+import {logOut} from "redux/reducers/authReducer";
+import {Button} from "antd";
+import {LoginOutlined, LogoutOutlined} from '@ant-design/icons'
 
-type HeaderPropsType = {
-    isAuth: boolean
-    login: string
-    logOut: () => void
-}
-export const Header = ({isAuth, login, ...props}: HeaderPropsType) => {
+export const HeaderContainer: React.FC = () => {
+    const dispatch = useDispatch()
+    const isAuth = useAppSelector(state => state.auth.isAuth)
+    const login = useAppSelector(state => state.auth.login)
+    const logoutHandler = () => dispatch(logOut())
+
     return (
-        <header className={s.header}>
-            <img className={s.logo} src="https://cdn.logo.com/hotlink-ok/logo-social.png" alt=""/>
-            <div className={s.loginBlock}>
+        <header className={s.headerWrapper}>
                 {isAuth
-                    ? <div>
-                        {login}
-                        <div>
-                            <button onClick={props.logOut}>log Out</button>
-                        </div>
-
+                    ? <div className={s.loginBlock}>
+                        <p>{login}</p>
+                        <Button icon={<LogoutOutlined />} size={'small'} onClick={logoutHandler}>log out</Button>
                     </div>
-                    : <NavLink className={s.loginLink} to={'/login'}>Login</NavLink>}
+                    : <Button className={s.loginLink} type='link' href='/#/login' icon={<LoginOutlined />}>Login</Button>
+                }
 
-            </div>
         </header>
     )
 }

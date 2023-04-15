@@ -1,7 +1,7 @@
-import {UserType} from "../../components/Users/Users";
+import {UserType} from "components/Users/Users";
 import {ActionTypes} from "../actionTypes";
 import {Dispatch} from "redux";
-import {usersAPI} from "../../api/api";
+import {usersAPI} from "api/api";
 
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
@@ -10,6 +10,7 @@ const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT'
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 const TOGGLE_IS_FOLLOWING = 'TOGGLE_IS_FOLLOWING'
+const SET_PAGE_SIZE = 'SET_PAGE_SIZE'
 
 export type stateUsersType = {
     users: UserType[]
@@ -38,6 +39,9 @@ export const userReducer = (state: stateUsersType = initialState, action: Action
             return {...state, users: action.users}
         case SET_CURRENT_PAGE:
             return {...state, currentPage: action.currentPage}
+        case SET_PAGE_SIZE: {
+            return {...state, pageSize: action.pageSize}
+        }
         case SET_TOTAL_COUNT:
             return {...state, totalUsersCount: action.totalCount}
         case TOGGLE_IS_FETCHING:
@@ -58,6 +62,7 @@ export const followSuccess = (userID: number) => ({type: FOLLOW, userID})
 export const unfollowSuccess = (userID: number) => ({type: UNFOLLOW, userID})
 export const setUsers = (users: UserType[]) => ({type: SET_USERS, users})
 export const setCurrentPage = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage} as const)
+export const setPageSize = (pageSize: number) => ({type: SET_PAGE_SIZE, pageSize} as const)
 export const setTotalCount = (totalCount: number) => ({type: SET_TOTAL_COUNT, totalCount} as const)
 export const toggleIsFetching = (isFetching: boolean) => ({type: TOGGLE_IS_FETCHING, isFetching} as const)
 export const toggleIsFollowing = (isFetching: boolean, userId: number) => ({
@@ -71,7 +76,7 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number) => a
     let data = await usersAPI.getUsers(currentPage, pageSize)
     dispatch(toggleIsFetching(false))
     dispatch(setUsers(data.items))
-    dispatch(setTotalCount(data.totalCount/10))
+    dispatch(setTotalCount(data.totalCount))
 }
 
 export const followThunkCreator = (userId: number) => async (dispatch: Dispatch) => {

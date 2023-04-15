@@ -54,7 +54,7 @@ export const profileAPI = {
             .then(response => response.data)
 
     },
-    savePhoto(photoFile: any) {
+    savePhoto(photoFile: File) {
         const formData = new FormData()
         formData.append('image', photoFile)
         return instance.put<ResponseType<{photos: {small: string, large: string}}>>('profile/photo', formData, {
