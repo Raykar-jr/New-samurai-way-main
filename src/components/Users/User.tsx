@@ -5,18 +5,21 @@ import s from "./Users.module.css";
 import {UserType} from "./Users";
 import {Button, Card} from "antd";
 import {CheckOutlined, CloseOutlined} from "@ant-design/icons";
+import {useDispatch} from "react-redux";
+import {followThunkCreator, unfollowThunkCreator} from "redux/reducers/userReducer";
+import {useAppSelector} from "redux/ReduxStore";
 
-type UserPropsType = {
-    unfollowThunkCreator: (userId: number) => void
-    followThunkCreator: (userId: number) => void
+type Props = {
     user: UserType
-    followingInProgress: Array<number>
 }
-export const User = ({user, ...props}: UserPropsType) => {
+export const User: React.FC<Props> = ({user}) => {
+    const dispatch = useDispatch()
+    const followingInProgress = useAppSelector(state => state.usersPage.followingInProgress)
+
     const imgUser = user.photos.small !== null ? user.photos.small : UserPhoto
-    const isDisabled = props.followingInProgress.some(id => id === user.id)
-    const unfollowHandler = () => props.unfollowThunkCreator(user.id)
-    const followHandler = () => props.followThunkCreator(user.id)
+    const isDisabled = followingInProgress.some(id => id === user.id)
+    const unfollowHandler = () => dispatch(unfollowThunkCreator(user.id))
+    const followHandler = () => dispatch(followThunkCreator(user.id))
     return (
         <Card style={{width: 300, margin: '20px 0px', textAlign: 'center' }}
               title={user.name}>

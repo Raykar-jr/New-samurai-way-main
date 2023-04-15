@@ -5,11 +5,17 @@
 }
 
 .dialogItems {
-padding: 15px;
+    padding: 15px;
 }
 
 .dialog {
 
+}
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
 }
 
 .messages {
@@ -17,8 +23,9 @@ padding: 15px;
 }
 
 .message {
-
+margin-bottom: 5px;
 }
+
 .dialogImage {
     width: 50px;
     border-radius: 50%;

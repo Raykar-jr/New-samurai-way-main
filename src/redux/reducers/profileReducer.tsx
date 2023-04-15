@@ -1,8 +1,8 @@
 import {ActionTypes} from "../actionTypes";
 import {Dispatch} from "redux";
-import {profileAPI} from "../../api/api";
+import {profileAPI} from "api/api";
 import {v1} from "uuid";
-import {ProfileType} from "../../components/Profile/Profile";
+import {ProfileType} from "components/Profile/Profile";
 
 const ADD_POST = 'ADD-POST'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
@@ -20,7 +20,7 @@ type ProfileInitialStateType = {
     status: string
 }
 // actions
-export const addPostActionCreator = (newPostText: string) => ({type: ADD_POST, newPostText} as const)
+export const addPost = (newPostText: string) => ({type: ADD_POST, newPostText} as const)
 export const setUserProfile = (profile: any) => ({type: SET_USER_PROFILE, profile} as const)
 export const setUserStatus = (status: string) => ({type: SET_USER_STATUS, status} as const)
 export const savePhotoAC = (photo: PhotoType) => ({type: SAVE_MAIN_PHOTO, photo} as const)

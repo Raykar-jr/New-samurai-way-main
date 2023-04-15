@@ -1,31 +1,26 @@
 import React from 'react';
 import s from './MyPosts.module.css'
 import {Post} from "./Post/Post";
-import {PostDataType} from "../../../redux/reducers/profileReducer";
-import {AddPostReduxForm, FormDataAddPostType} from "./AddPostForm";
+import {addPost} from "redux/reducers/profileReducer";
+import {MessageForm} from "components/Dialogs/MessageForm";
+import {useDispatch} from "react-redux";
+import {useAppSelector} from "redux/ReduxStore";
 
 
+export const MyPosts = () => {
+    const dispatch = useDispatch()
+    const posts = useAppSelector(state => state.profilePage.postData)
+    const postElements = posts.map(el => <Post key={el.id}
+                                               id={el.id}
+                                               likeCounts={el.likeCounts}
+                                               message={el.message}/>)
 
-type MyPostsPropsType = {
-    posts: PostDataType[]
-    addPost: (newPostText: string) => void
-}
-export const MyPosts = (props: MyPostsPropsType) => {
-    const postElements = props.posts.map(el => <Post key={el.id}
-                                                     id={el.id}
-                                                     likeCounts={el.likeCounts}
-                                                     message={el.message}/>)
-
-    const addPostHandler = (formData: FormDataAddPostType) => {
-        props.addPost(formData.newPostMessage)
-    }
-
+    const submitHandler = (data: string) => dispatch(addPost(data))
     return (
         <div className={s.myPostsBlock}>
             <h3>My posts</h3>
             <div>
-
-                <AddPostReduxForm onSubmit={addPostHandler}/>
+                <MessageForm onSubmitForm={submitHandler}/>
 
                 <div className={s.posts}>
                     {postElements}

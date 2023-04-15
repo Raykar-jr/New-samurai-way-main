@@ -71,7 +71,7 @@ export const toggleIsFollowing = (isFetching: boolean, userId: number) => ({
 } as const)
 
 // thunks
-export const getUsersThunkCreator = (currentPage: number, pageSize: number) => async (dispatch: Dispatch) => {
+export const getUsers = (currentPage: number, pageSize: number) => async (dispatch: Dispatch) => {
     dispatch(toggleIsFetching(true))
     let data = await usersAPI.getUsers(currentPage, pageSize)
     dispatch(toggleIsFetching(false))

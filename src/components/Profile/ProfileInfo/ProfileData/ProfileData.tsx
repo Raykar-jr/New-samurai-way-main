@@ -1,22 +1,27 @@
-import {ProfileType} from "../../Profile";
-import {ProfileStatusWithHook} from "../ProfileStatusWithHook";
+import {ProfileStatus} from "components/Profile/ProfileInfo/ProfileStatus";
 import React from "react";
 import {Contact} from "./Contact";
+import {ProfileType} from "components/Profile/Profile";
+import {updateUserStatus} from "redux/reducers/profileReducer";
+import {useDispatch} from "react-redux";
+import {useAppSelector} from "redux/ReduxStore";
 
 type ProfileDataPropsType = {
     profile: ProfileType
-    status: string
-    updateUserStatus: (status: string) => void
 
 }
-export const ProfileData = ({profile, status, updateUserStatus}: ProfileDataPropsType) => {
+export const ProfileData = ({profile}: ProfileDataPropsType) => {
+    const dispatch = useDispatch()
+
+    const status = useAppSelector(state => state.profilePage.status)
+
+    const onChangeStatus = (status: string) => dispatch(updateUserStatus(status))
     return (
         <div>
             <div>
                 <b>Full name:</b> {profile.fullName}
             </div>
-            {/* <ProfileStatus status={status} onChangeStatus={onChangeStatus}/>*/}
-            <ProfileStatusWithHook status={status} onChangeStatus={updateUserStatus}/>
+            <ProfileStatus status={status} onChangeStatus={onChangeStatus}/>
             <div>
                 <b>About me:</b> {profile.aboutMe}
             </div>

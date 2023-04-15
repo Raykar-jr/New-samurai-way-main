@@ -1,29 +1,27 @@
 import React, {ChangeEvent} from 'react';
 import s from './ProfileInfo.module.css'
 import {Preloader} from "comma/Preloader/Preloader";
-import {ProfileType} from "../Profile";
 import UserPhoto from "../../../assets/images/man.jpg";
-import {Dispatch} from "redux";
 import {ProfileData} from "./ProfileData/ProfileData";
+import {useAppSelector} from "redux/ReduxStore";
+import {useDispatch} from "react-redux";
+import {saveMainPhoto} from "redux/reducers/profileReducer";
 
 
-type ProfileInfoPropsType = {
-    saveMainPhoto: Function
+type Props = {
     isOwner: boolean
-    profile: ProfileType
-    status: string
-    updateUserStatus: (status: string) => (dispatch: Dispatch) => void
 }
-const ProfileInfo = ({profile, status, isOwner, saveMainPhoto, ...props}: ProfileInfoPropsType) => {
+const ProfileInfo = ({isOwner}: Props) => {
+    const dispatch = useDispatch()
+    const profile = useAppSelector(state => state.profilePage.profile)
+
     if (!profile) {
         return <Preloader/>
     }
-    const onChangeStatus = (status: string) => {
-        props.updateUserStatus(status)
-    }
+
     const onSaveMainPhotoHandler = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target?.files?.length) {
-            saveMainPhoto(e.target.files[0])
+            dispatch(saveMainPhoto(e.target.files[0]))
         }
     }
     return (
@@ -36,7 +34,7 @@ const ProfileInfo = ({profile, status, isOwner, saveMainPhoto, ...props}: Profil
                     <br/>
                     {isOwner && <input type='file' className={s.input} id='avatar' onChange={onSaveMainPhotoHandler}/>}
                 </div>
-                <ProfileData profile={profile} status={status} updateUserStatus={onChangeStatus}/>
+                <ProfileData profile={profile}/>
             </div>
         </div>
     );
