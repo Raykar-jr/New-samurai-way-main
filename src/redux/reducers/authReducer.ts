@@ -1,6 +1,6 @@
-import {authAPI} from "api/api";
+import {authAPI} from "api";
 import {AnyAction, Dispatch} from "redux";
-import { AppStateType} from "../ReduxStore";
+import { AppStateType} from "redux/store";
 import {stopSubmit} from "redux-form";
 import {ThunkAction} from "redux-thunk";
 
@@ -48,7 +48,7 @@ export const getAuthUserData = () => async (dispatch: Dispatch) => {
 }
 
 
-export const logIn = (email: string, password: string, rememberMe: boolean):ThunkAction<void, AppStateType, unknown, AnyAction> =>
+export const login = (email: string, password: string, rememberMe: boolean):ThunkAction<void, AppStateType, unknown, AnyAction> =>
     async (dispatch, getState: () => AppStateType) => {
         let response = await authAPI.login(email, password, rememberMe)
                 if (response.data.resultCode === 0) {
@@ -61,7 +61,7 @@ export const logIn = (email: string, password: string, rememberMe: boolean):Thun
 
     }
 
-export const logOut = () => async (dispatch: Dispatch) => {
+export const logout = () => async (dispatch: Dispatch) => {
     let response = await authAPI.logout()
             if (response.data.resultCode === 0) {
                 dispatch(setAuthDataUser(null, null, null, false))

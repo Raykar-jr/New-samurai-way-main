@@ -1,7 +1,7 @@
 import {AnyAction} from "redux";
 import {getAuthUserData} from "./authReducer";
 import {ThunkAction} from "redux-thunk";
-import {AppStateType} from "../ReduxStore";
+import {AppStateType} from "redux/store";
 
 const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS'
 

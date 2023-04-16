@@ -1,5 +1,5 @@
 import {v1} from "uuid";
-import {addPostActionCreator, PostDataType, profileReducer} from "./profileReducer";
+import {addPost, PostDataType, profileReducer} from "./profileReducer";
 
 test('post should be added', () => {
     // state
@@ -11,7 +11,7 @@ test('post should be added', () => {
         profile: null,
         status: '',
     }
-    let action = addPostActionCreator('Hello')
+    let action = addPost('Hello')
 
     // actions
     let newState = profileReducer(initialState, action)

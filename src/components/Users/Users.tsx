@@ -1,11 +1,11 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {User} from "./User";
 import s from './Users.module.css'
-import {Pagination, PaginationProps} from "antd";
-import {useAppSelector} from "redux/ReduxStore";
+import {Input, Pagination, PaginationProps} from "antd";
+import {useAppSelector} from "redux/store";
 import {getUsers, setCurrentPage, setPageSize} from "redux/reducers/userReducer";
 import {useDispatch} from "react-redux";
-import {Preloader} from "comma/Preloader/Preloader";
+import {Preloader} from "comma/preloader/Preloader";
 
 export type UserType = {
     id: number
@@ -22,9 +22,10 @@ export type UserType = {
         country: string
     }
 }
-
+const { Search } = Input;
 export const Users = () => {
     const dispatch = useDispatch()
+    const [searchValue, setSearchValue] = useState('')
 
     const users = useAppSelector(state => state.usersPage.users)
     const isFetching = useAppSelector(state => state.usersPage.isFetching)
@@ -32,22 +33,26 @@ export const Users = () => {
     const currentPage = useAppSelector(state => state.usersPage.currentPage)
     const pageSize = useAppSelector(state => state.usersPage.pageSize)
 
-    const onChange: PaginationProps['onChange'] = (page, pageSize) => {
+    const onChangePagination: PaginationProps['onChange'] = (page, pageSize) => {
         dispatch(setCurrentPage(page))
         dispatch(setPageSize(pageSize))
     };
+    const onSearch = (userName: string) => setSearchValue(userName)
 
     useEffect(() => {
-        dispatch(getUsers(currentPage, pageSize))
-    }, [currentPage, pageSize])
+        dispatch(getUsers(currentPage, pageSize,searchValue))
+    }, [currentPage, pageSize, searchValue])
 
     if (isFetching) {
         return <Preloader/>
     }
     return (
         <>
-            <Pagination current={currentPage} showQuickJumper onChange={onChange} pageSize={pageSize}
-                        total={totalUsersCount}/>
+            <div className={s.filterPanel}>
+                <Pagination current={currentPage} showQuickJumper onChange={onChangePagination} pageSize={pageSize}
+                            total={totalUsersCount}/>
+                <Search onSearch={onSearch} allowClear className={s.searchInput} placeholder='Search users by name' />
+            </div>
             <div className={s.usersContainer}>
                 {users.map((u: UserType) => {
                         return (

@@ -1,5 +1,5 @@
 import {
-    addPostActionCreator, savePhotoAC,
+    addPost, removePost, savePhotoAC,
     setUserProfile,
     setUserStatus,
 } from "../reducers/profileReducer";
@@ -7,7 +7,8 @@ import {sendNewMessageAC} from "../reducers/dialogsReducer";
 import {setCurrentPage, setPageSize, setTotalCount, toggleIsFetching, toggleIsFollowing} from "../reducers/userReducer";
 import {UserType} from "components/Users/Users";
 
-export type AddPostActionType = ReturnType<typeof addPostActionCreator>
+export type AddPostActionType = ReturnType<typeof addPost>
+export type RemovePostAT = ReturnType<typeof removePost>
 export type SendNewMessageActionType = ReturnType<typeof sendNewMessageAC>
 export type SetCurrentPageAT = ReturnType<typeof setCurrentPage>
 export type SetTotalCountAT = ReturnType<typeof setTotalCount>
@@ -36,3 +37,4 @@ export type ActionTypes =
     | SetUserStatus
     | savePhotoAT
     | SetPageSizeAT
+    | RemovePostAT

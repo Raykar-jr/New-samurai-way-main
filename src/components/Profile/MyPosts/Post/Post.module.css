@@ -1,9 +1,26 @@
-.item {
-    color: black;
+.postWrapper {
+    width: 350px;
+    margin: 20px 0;
+    position: relative;
 }
-
 .avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 30px;
+    width: 40px;
+    height: 40px;
+}
+.postLike {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+.imageWithText {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+.deleteIcon {
+    font-size: 18px;
+    position: absolute;
+    top: 10px;
+    right: 15px;
 }

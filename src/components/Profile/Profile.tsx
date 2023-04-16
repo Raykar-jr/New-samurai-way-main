@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {MyPosts} from "components/Profile/MyPosts/MyPosts";
-import {useAppSelector} from "redux/ReduxStore";
+import {useAppSelector} from "redux/store";
 import {useDispatch} from "react-redux";
 import {getUserProfile, getUserStatus} from "redux/reducers/profileReducer";
 import {useHistory, useParams} from "react-router-dom";

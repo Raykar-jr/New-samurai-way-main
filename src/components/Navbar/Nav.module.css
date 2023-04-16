@@ -1,38 +1,3 @@
 .nav {
-   /* grid-area: n;*/
-   /* background-color: bisque;*/
     padding: 15px;
-    font-family: Karla, serif;
-
-}
-
-
-.friendsBlock {
-    margin-top: 100px;
-
-}
-.friendsTitle {
-    color: #FFF;
-    font-size: 1.1rem;
-    font-weight: 400;
-    line-height: 1.25;
-}
-
-.circle {
-    background-color: #1abc9c;
-    width: 40px;
-    height: 40px;
-    border: 2px solid black;
-    border-radius: 50%;
-}
-.circleBlock {
-    display: inline-grid;
-    grid-template-columns: repeat(3,60px);
-}
-.namesBlock {
-    margin-left: 4px;
-}
-.names {
-    display: inline-grid;
-    grid-template-columns: repeat(3,19px);
 }

@@ -3,8 +3,8 @@ import './App.css';
 import {Navbar} from "components/Navbar/Nav";
 import {useDispatch} from "react-redux";
 import {initializeApp} from "redux/reducers/appReducer";
-import {useAppSelector} from "redux/ReduxStore";
-import {Preloader} from "comma/Preloader/Preloader";
+import {useAppSelector} from "redux/store";
+import {Preloader} from "comma/preloader/Preloader";
 import {Layout} from 'antd';
 import {HeaderContainer} from "components/Header/Header";
 import logo from 'assets/images/social-media-logo.png'

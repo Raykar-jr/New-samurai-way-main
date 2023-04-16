@@ -7,7 +7,7 @@ import {Button, Card} from "antd";
 import {CheckOutlined, CloseOutlined} from "@ant-design/icons";
 import {useDispatch} from "react-redux";
 import {followThunkCreator, unfollowThunkCreator} from "redux/reducers/userReducer";
-import {useAppSelector} from "redux/ReduxStore";
+import {useAppSelector} from "redux/store";
 
 type Props = {
     user: UserType

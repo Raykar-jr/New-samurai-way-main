@@ -1,4 +1,3 @@
-import React from 'react';
 import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import {profileReducer} from "./reducers/profileReducer";
 import {dialogsReducer} from "./reducers/dialogsReducer";
@@ -33,7 +32,7 @@ export type AppStateType = ReturnType<typeof rootReducer>
 
 // @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-export let store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)));
+export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)));
 
 // export let store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
 

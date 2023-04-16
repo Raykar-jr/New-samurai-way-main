@@ -15,3 +15,11 @@
     justify-content: center;
     gap: 10px;
 }
+.filterPanel {
+    display: flex;
+    align-items: center;
+}
+.searchInput {
+    width: 220px;
+    margin-left: 20px;
+}

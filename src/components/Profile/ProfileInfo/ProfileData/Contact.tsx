@@ -1,4 +1,3 @@
-import {Link} from "react-router-dom";
 import React from "react";
 
 type ContactPropsType = {
@@ -8,6 +7,6 @@ type ContactPropsType = {
 export const Contact = ({contactTitle, contactValue}: ContactPropsType) => {
 
     return (
-        <li><Link to={contactValue !== null ? contactValue : ''}>{contactTitle}</Link></li>
+            <li><a href={contactValue !== null ? `https://${contactValue}` : 'https://ru.reactjs.org/'}>{contactTitle}</a></li>
     )
 }

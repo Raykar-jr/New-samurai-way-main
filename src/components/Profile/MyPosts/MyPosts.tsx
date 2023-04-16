@@ -4,7 +4,7 @@ import {Post} from "./Post/Post";
 import {addPost} from "redux/reducers/profileReducer";
 import {MessageForm} from "components/Dialogs/MessageForm";
 import {useDispatch} from "react-redux";
-import {useAppSelector} from "redux/ReduxStore";
+import {useAppSelector} from "redux/store";
 
 
 export const MyPosts = () => {

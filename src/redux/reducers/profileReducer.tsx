@@ -1,6 +1,6 @@
 import {ActionTypes} from "../actionTypes";
 import {Dispatch} from "redux";
-import {profileAPI} from "api/api";
+import {profileAPI} from "api";
 import {v1} from "uuid";
 import {ProfileType} from "components/Profile/Profile";
 
@@ -8,6 +8,7 @@ const ADD_POST = 'ADD-POST'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_USER_STATUS = 'SET_USER_STATUS'
 const SAVE_MAIN_PHOTO = 'SAVE_MAIN_PHOTO'
+const REMOVE_POST = 'REMOVE_POST'
 
 export type PostDataType = {
     id: string
@@ -21,6 +22,7 @@ type ProfileInitialStateType = {
 }
 // actions
 export const addPost = (newPostText: string) => ({type: ADD_POST, newPostText} as const)
+export const removePost = (postId: string) => ({type: REMOVE_POST, postId} as const)
 export const setUserProfile = (profile: any) => ({type: SET_USER_PROFILE, profile} as const)
 export const setUserStatus = (status: string) => ({type: SET_USER_STATUS, status} as const)
 export const savePhotoAC = (photo: PhotoType) => ({type: SAVE_MAIN_PHOTO, photo} as const)
@@ -39,7 +41,9 @@ export const profileReducer = (state: ProfileInitialStateType = initialState, ac
     switch (action.type) {
         case ADD_POST:
             let newPost: PostDataType = {id: v1(), message: action.newPostText, likeCounts: 0}
-            return {...state, postData: [...state.postData, newPost]}
+            return {...state, postData: [newPost, ...state.postData ]}
+        case REMOVE_POST:
+              return {...state, postData: state.postData.filter(p => p.id !== action.postId)}
         case SET_USER_PROFILE:
             return {...state, profile: action.profile}
         case SET_USER_STATUS:

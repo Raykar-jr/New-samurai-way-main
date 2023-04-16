@@ -1,11 +1,8 @@
-.description {
+.profileInfoWrapper {
     margin-left: 20px;
     padding: 10px;
 }
 .userPhoto {
     max-width: 120px;
     border-radius: 20%;
-}
-.input {
-    color: transparent;
 }

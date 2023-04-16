@@ -2,7 +2,7 @@ import React from 'react';
 import s from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {useAppSelector} from "redux/ReduxStore";
+import {useAppSelector} from "redux/store";
 import {MessageForm} from "components/Dialogs/MessageForm";
 import {sendNewMessageAC} from "redux/reducers/dialogsReducer";
 import {useDispatch} from "react-redux";

@@ -1,7 +1,7 @@
 import {UserType} from "components/Users/Users";
 import {ActionTypes} from "../actionTypes";
 import {Dispatch} from "redux";
-import {usersAPI} from "api/api";
+import {usersAPI} from "api";
 
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
@@ -71,9 +71,9 @@ export const toggleIsFollowing = (isFetching: boolean, userId: number) => ({
 } as const)
 
 // thunks
-export const getUsers = (currentPage: number, pageSize: number) => async (dispatch: Dispatch) => {
+export const getUsers = (currentPage: number, pageSize: number, usersName?: string) => async (dispatch: Dispatch) => {
     dispatch(toggleIsFetching(true))
-    let data = await usersAPI.getUsers(currentPage, pageSize)
+    let data = await usersAPI.getUsers(currentPage, pageSize, usersName)
     dispatch(toggleIsFetching(false))
     dispatch(setUsers(data.items))
     dispatch(setTotalCount(data.totalCount))
