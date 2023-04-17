@@ -24,7 +24,7 @@ export const HeaderContainer: React.FC = () => {
                         <p>{login}</p>
                         <Button icon={<LogoutOutlined />} size={'small'} onClick={logoutHandler}>log out</Button>
                     </div>
-                    : <Button className={s.loginLink} type='link' href='/#/login' icon={<LoginOutlined />}>Login</Button>
+                    : <Button className={s.loginLink} type='link' href='/New-samurai-way-main/#/login' icon={<LoginOutlined />}>Login</Button>
                 }
 
         </header>
