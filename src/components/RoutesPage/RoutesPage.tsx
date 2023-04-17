@@ -18,6 +18,7 @@ export const RoutesPage = () => {
             <Route path='/settings' render={() => <Settings/>}/>
             <Route path='/users' render={() => <Users/>}/>
             <Route path='/login' render={() => <Login/>}/>
+            <Route path='*' render={() => <Login/>}/>
         </>
     );
 };
