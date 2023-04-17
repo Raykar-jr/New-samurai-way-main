@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route} from "react-router-dom";
+import {Redirect, Route} from "react-router-dom";
 import News from "components/News/News";
 import Music from "components/Music/Music";
 import Settings from "components/Settings/Settings";
@@ -18,7 +18,9 @@ export const RoutesPage = () => {
             <Route path='/settings' render={() => <Settings/>}/>
             <Route path='/users' render={() => <Users/>}/>
             <Route path='/login' render={() => <Login/>}/>
-            <Route path='*' render={() => <Login/>}/>
+            <Route path="*">
+               <Redirect to="/login" />
+            </Route>
         </>
     );
 };
